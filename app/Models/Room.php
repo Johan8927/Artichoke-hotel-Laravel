@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
+    use HasFactory;
     protected $fillable = [
-        'type_id',
-        'number',
-        'capacity',
-        'is_available',
-        'description',
+        'id_Room',
+        'id_RoomType',
+        'id_Hotel',
+        'RoomNumber',
     ];
 
     // Getter pour l'attribut 'is_available' - Formate la valeur avant de la renvoyer
