@@ -1,20 +1,20 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-//Voici les endpoints CRUD générés par la route apiResource :
 
-//GET /api/rooms: Liste des chambres.
-//GET /api/rooms/{id}: Détails d'une chambre spécifique.
-//POST /api/rooms: Créer une nouvelle chambre (données à fournir via JSON).
-//PUT /api/rooms/{id}: Mettre à jour une chambre existante.
-//DELETE /api/rooms/{id}: Supprimer une chambre.
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::apiResource('rooms','RoomController');
-Route::resource('rooms','RoomController');
-Route::apiResource('hotels','HotelController');
-Route::resource('hotels','HotelController');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+require __DIR__.'/auth.php';
