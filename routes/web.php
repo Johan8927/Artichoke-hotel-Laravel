@@ -12,3 +12,9 @@ Route::get('/', function () {
 //POST /api/rooms: Créer une nouvelle chambre (données à fournir via JSON).
 //PUT /api/rooms/{id}: Mettre à jour une chambre existante.
 //DELETE /api/rooms/{id}: Supprimer une chambre.
+
+Route::apiResource('rooms','RoomController');
+Route::resource('rooms','RoomController');
+Route::apiResource('hotels','HotelController');
+Route::resource('hotels','HotelController');
+
