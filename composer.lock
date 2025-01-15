@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "626b9e7ddd47fb7eff9aaa53cce0c9ad",
+    "content-hash": "204fd176a77b3a18be5089cde26f2142",
     "packages": [
         {
             "name": "brick/math",
@@ -5800,6 +5800,105 @@
     ],
     "packages-dev": [
         {
+            "name": "digitaldream/dbreader",
+            "version": "1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digitaldreams/dbreader.git",
+                "reference": "54bfe8e024a91e536d629bf2a04e3adc6a9ef496"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digitaldreams/dbreader/zipball/54bfe8e024a91e536d629bf2a04e3adc6a9ef496",
+                "reference": "54bfe8e024a91e536d629bf2a04e3adc6a9ef496",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DbReader\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tuhin",
+                    "email": "digitaldreams40@gmail.com"
+                }
+            ],
+            "description": "Database Reader",
+            "support": {
+                "issues": "https://github.com/digitaldreams/dbreader/issues",
+                "source": "https://github.com/digitaldreams/dbreader/tree/1.4"
+            },
+            "time": "2017-09-18T17:06:51+00:00"
+        },
+        {
+            "name": "digitaldream/laracrud",
+            "version": "5.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/digitaldreams/laracrud.git",
+                "reference": "4c5aa9b6fc2f5122bdd6b5a1ab8bf60ce8fadd62"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/digitaldreams/laracrud/zipball/4c5aa9b6fc2f5122bdd6b5a1ab8bf60ce8fadd62",
+                "reference": "4c5aa9b6fc2f5122bdd6b5a1ab8bf60ce8fadd62",
+                "shasum": ""
+            },
+            "require": {
+                "digitaldream/dbreader": "~1.0",
+                "laravel/framework": "^9.0|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "suggest": {
+                "intervention/image": "For Image"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": [],
+                    "providers": [
+                        "LaraCrud\\LaraCrudServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaraCrud\\": "src/lara-crud/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tuhin Bepari",
+                    "email": "digitaldreams40@gmail.com",
+                    "homepage": "http://www.tuhinbepari.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Do you have a well structured database and you want to make a Laravel Application on top of it. By using this tools you can generate Models which have necessary methods and property, Request class with rules, generate route from controllers method and its parameter and full features form with validation error message and more with a single line of command",
+            "homepage": "https://github.com/digitaldreams/laracrud",
+            "keywords": [
+                "code generator",
+                "crud",
+                "laravel",
+                "laravel code generator"
+            ],
+            "support": {
+                "issues": "https://github.com/digitaldreams/laracrud/issues",
+                "source": "https://github.com/digitaldreams/laracrud/tree/5.0.1"
+            },
+            "time": "2024-12-17T03:05:31+00:00"
+        },
+        {
             "name": "fakerphp/faker",
             "version": "v1.24.1",
             "source": {
@@ -8076,12 +8175,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
