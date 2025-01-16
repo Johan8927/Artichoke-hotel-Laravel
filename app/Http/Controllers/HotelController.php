@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Hotel;
+use Illuminate\View\View;
 use LaraCrud\Crud\Controller;
 
 
@@ -14,9 +17,9 @@ class HotelController extends Controller
        /**
      * Display a listing of Hotel
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function index(Request $request)
+    public function index(Request $request): Factory|View
     {
           $builder = Hotel::query();
         return view('pages.hotels.index', [
@@ -27,9 +30,9 @@ class HotelController extends Controller
    /**
      * Display the specified Hotel.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function show(Hotel $hotel)
+    public function show(Hotel $hotel): Factory|View
     {
 
         return view('pages.hotels.show', [
@@ -40,9 +43,9 @@ class HotelController extends Controller
    /**
      * Show the form for creating a new Hotel.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function create()
+    public function create(): Factory|View
     {
 
         return view('pages.hotels.create', [
@@ -53,9 +56,9 @@ class HotelController extends Controller
     /**
      * Store a newly created Hotel in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
           $hotel = new Hotel;
 		$hotel->fill($request->all())->save();
@@ -66,9 +69,9 @@ class HotelController extends Controller
    /**
      * Show the form for editing the specified Hotel.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function edit(Hotel $hotel)
+    public function edit(Hotel $hotel): Factory|View
     {
 
         return view('pages.hotels.edit', [
@@ -79,9 +82,9 @@ class HotelController extends Controller
     /**
      * Update the specified Hotel in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request,Hotel $hotel)
+    public function update(Request $request,Hotel $hotel): RedirectResponse
     {
           $hotel->fill($request->all())->save();
 
@@ -91,9 +94,9 @@ class HotelController extends Controller
     /**
      * Remove the specified Hotel from storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy(Hotel $hotel)
+    public function destroy(Hotel $hotel): RedirectResponse
     {
           $hotel->delete();
          return redirect()->route('hotels.index',$hotel->id)->with('message','Hotel successfully destroy');

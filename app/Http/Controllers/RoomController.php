@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Room;
+use Illuminate\View\View;
 use LaraCrud\Crud\Controller;
 
 
@@ -18,9 +21,9 @@ class RoomController extends Controller
        /**
      * Display a listing of Room
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function index(Request $request)
+    public function index(Request $request): Factory|View
     {
           $builder = Room::query();
         return view('pages.rooms.index', [
@@ -31,9 +34,9 @@ class RoomController extends Controller
    /**
      * Display the specified Room.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function show(Room $room)
+    public function show(Room $room): Factory|View
     {
 
         return view('pages.rooms.show', [
@@ -44,9 +47,9 @@ class RoomController extends Controller
    /**
      * Show the form for creating a new Room.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function create()
+    public function create(): Factory|View
     {
 
         return view('pages.rooms.create', [
@@ -57,9 +60,9 @@ class RoomController extends Controller
     /**
      * Store a newly created Room in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
           $room = new Room;
 		$room->fill($request->all())->save();
@@ -70,9 +73,9 @@ class RoomController extends Controller
    /**
      * Show the form for editing the specified Room.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function edit(Room $room)
+    public function edit(Room $room): Factory|View
     {
 
         return view('pages.rooms.edit', [
@@ -83,9 +86,9 @@ class RoomController extends Controller
     /**
      * Update the specified Room in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request,Room $room)
+    public function update(Request $request,Room $room): RedirectResponse
     {
           $room->fill($request->all())->save();
 
@@ -95,9 +98,9 @@ class RoomController extends Controller
     /**
      * Remove the specified Room from storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy(Room $room)
+    public function destroy(Room $room): RedirectResponse
     {
           $room->delete();
          return redirect()->route('rooms.index',$room->id)->with('message','Room successfully destroy');
