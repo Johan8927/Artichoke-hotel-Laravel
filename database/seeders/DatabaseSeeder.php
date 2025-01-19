@@ -22,7 +22,14 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('password'), // Ajout d'un mot de passe pour l'utilisateur
             ]);
         }
+        $this->call([
+            PicturesSeeder::class,
+            LandingPageNewsSeeder::class,
+            LandingPageAmenitiesSeeder::class,
+            LandingPageHeroSeeder::class,
+            HotelRoomTypeSeeder::class,
 
+        ]);
         // Création de 5 hôtels et leurs chambres associées
         Hotel::factory(5)->create()->each(function (Hotel $hotel) {
             // Création de 10 chambres pour chaque hôtel

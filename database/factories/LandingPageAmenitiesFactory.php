@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class LandingPageAmenitiesFactory extends Factory
 {
-    protected $model = LandingPageAmenity::class;
+    protected $model = LandingPageAmenities::class;
 
     public function definition()
     {
@@ -36,6 +36,7 @@ class LandingPageAmenitiesFactory extends Factory
 
 
             $services[] = [
+                'id' => LandingPageAmenities::factory(),
                 'section_name' => $section_name,
                 'section_content' => $section_content,
                 'price' => $price,
