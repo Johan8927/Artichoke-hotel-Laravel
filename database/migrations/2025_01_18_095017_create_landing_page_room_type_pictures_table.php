@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('landing_page_rooms', function (Blueprint $table) {
             $table->id();
+            $table->integer('roomtype_id');
+            $table->integer('picture_id');
             $table->timestamps();
         });
     }

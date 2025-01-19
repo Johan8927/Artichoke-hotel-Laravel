@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\LandingPageHero;
 
 class LandingPageHeroSeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class LandingPageHeroSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        LandingPageHero::factory(1)->create(
+            ['section-name'=>'Hotel Artichaut',
+                'section_content'=>'An escape to the gorgeous lavender fields',
+                'picture_id'=>1,
+                ]
+        );
     }
 }

@@ -3,21 +3,20 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\LandingPageNews;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
 class LandingPageNewsFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = LandingPageNews::class;
+
+    public function definition()
     {
         return [
-            //
+            'section_name' => $this->faker->sentence(3), // Génère un titre court pour l'article
+            'section_content' => $this->faker->paragraph(5), // Génère le contenu de l'article
         ];
     }
 }

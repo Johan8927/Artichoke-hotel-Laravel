@@ -7,11 +7,11 @@ use Illuminate\Database\Seeder;
 
 class HotelRoomTypeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
     {
-        //
+        $this->call([
+            HotelRoomTypeSeeder::class,
+        ]);
     }
 }

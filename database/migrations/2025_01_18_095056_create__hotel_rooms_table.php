@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('_hotel_rooms', function (Blueprint $table) {
             $table->id();
+            $table->integer('room_number');
+            $table->integer('room_type_id');
+            $table->integer('hotel_id');
             $table->timestamps();
         });
     }

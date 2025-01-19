@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('landing_page_amenities', function (Blueprint $table) {
             $table->id();
+            $table->string('section_name');
+            $table->string('section_content');
+            $table->integer('price');
+            $table->integer('picture_id');
             $table->timestamps();
         });
     }

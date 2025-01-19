@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('landing_page_news', function (Blueprint $table) {
             $table->id();
+            $table->string('section_name');
+            $table->string('section_content');
             $table->timestamps();
         });
     }

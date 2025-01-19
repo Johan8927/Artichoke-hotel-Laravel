@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('landing_page_hero', function (Blueprint $table) {
             $table->id();
+            $table->string('section_name');
+            $table->string('section_content');
+            $table->integer('picture_id');
             $table->timestamps();
         });
     }
