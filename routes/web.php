@@ -18,11 +18,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-Route::resource('landingpagenews','LandingPageNewsController');
-
-Route::resource('landingpageamenities','LandingPageAmenitiesController');
-
-Route::resource('landingpageheroes','LandingPageHeroController');
-
-Route::resource('hotelroomtypes','HotelRoomTypesController');
-
