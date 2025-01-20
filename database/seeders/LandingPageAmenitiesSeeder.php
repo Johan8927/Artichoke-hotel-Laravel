@@ -13,6 +13,34 @@ class LandingPageAmenitiesSeeder extends Seeder
      */
     public function run(): void
     {
-        LandingPageAmenities::factory(10)->create();
+        $landingPageAmenities = [
+            [
+                'section_name' =>'Demi-pension (soir)',
+                'section_content'=>'75€/personne/jour',
+                'price'=>75,
+                'picture_id'=>1
+            ],
+            [
+                'section_name' =>'Demi-pension (soir)',
+                'section_content'=>'75€/personne/jour',
+                'price'=>75,
+                'picture_id'=>1
+            ],
+            [
+                'section_name' =>'Demi-pension (soir)',
+                'section_content'=>'75€/personne/jour',
+                'price'=>75,
+                'picture_id'=>1
+            ],
+            [
+                'section_name' =>'Demi-pension (soir)',
+                'section_content'=>'75€/personne/jour',
+                'price'=>75,
+                'picture_id'=>1
+            ]
+        ];
+        foreach ($landingPageAmenities as $landingPageAmenity) {
+            LandingPageAmenities::create($landingPageAmenity);
+        }
     }
 }
