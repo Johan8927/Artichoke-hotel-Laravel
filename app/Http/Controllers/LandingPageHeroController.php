@@ -7,109 +7,114 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\LandingPageHero;
-use App\Models\LandingPageNews; // Pour les actualités
-use App\Models\Room; // Pour les chambres
-use App\Models\Pictures; // Si tu as des images spécifiques
+use App\Models\LandingPageNews;
+use App\Models\Room;
+use App\Models\Pictures;
 
 /**
- * Controller de la page d'accueil
+ * Contrôleur pour la gestion de la page LandingPageHero
  */
 class LandingPageHeroController extends Controller
 {
     /**
-     * Afficher la page d'accueil avec les héros, chambres et actualités
+     * Afficher la page principale avec les données nécessaires.
      *
-     * @return View|Factory
+     * @return Factory|View
      */
     public function index(): Factory|View
     {
-        // Récupérer les données nécessaires pour la vue
         $landingPageHeroes = LandingPageHero::all();
-        $room = Room::limit(3)->get(); // Limite à 3 chambres (exemple)
-        $news = LandingPageNews::limit(3)->get(); // Limite à 3 actualités (exemple)
-        $heroPicture = Pictures::where('name', 'HotelSeeder Exterior')->first(); // Exemple d'image d'hôtel
+        $rooms = Room::limit(3)->get();
+        $news = LandingPageNews::limit(3)->get();
+        $heroPicture = Pictures::where('name', 'HotelSeeder Exterior')->first();
 
-        // Retourner la vue avec les données
-        return view('welcome', [
-            'landingPageHeroes' => $landingPageHeroes,
-            'room' => $room,
-            'news' => $news,
-            'heroPicture' => $heroPicture,
-        ]);
+        return view('landingPageHero.index', compact('landingPageHeroes', 'rooms', 'news', 'heroPicture'));
     }
 
     /**
-     * Afficher un héros spécifique de la landing page.
+     * Afficher un héros spécifique.
      *
-     * @return View|Factory
+     * @param LandingPageHero $landingPageHero
+     * @return Factory|View
      */
     public function show(LandingPageHero $landingPageHero): Factory|View
     {
-        return view('pages.landingPageHeroes.show', [
-            'landingPageHero' => $landingPageHero,
-        ]);
+        return view('pages.landingPageHeroes.show', compact('landingPageHero'));
     }
 
     /**
-     * Afficher le formulaire de création pour un nouveau héros de landing page.
+     * Afficher le formulaire de création pour un nouveau héros.
      *
-     * @return View|Factory
+     * @return Factory|View
      */
     public function create(): Factory|View
     {
-        return view('pages.landingPageHeroes.create', [
-            'landingPageHero' => new LandingPageHero,
-        ]);
+        return view('pages.landingPageHeroes.create');
     }
 
     /**
-     * Stocker un nouveau héros de landing page.
+     * Stocker un nouveau héros.
      *
+     * @param Request $request
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
     {
-        $landingPageHero = new LandingPageHero;
-        $landingPageHero->fill($request->all())->save();
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|string',
+        ]);
 
-        return redirect()->route('landingPageHeroes.show', $landingPageHero->id)
-            ->with('message', 'LandingPageHero successfully stored');
+        $landingPageHero = LandingPageHero::create($request->all());
+
+        return redirect()->route('landingpageheroes.show', $landingPageHero->id)
+            ->with('message', 'Héros créé avec succès.');
     }
 
     /**
-     * Afficher le formulaire pour éditer un héros de landing page.
+     * Afficher le formulaire pour modifier un héros.
      *
-     * @return View|Factory
+     * @param LandingPageHero $landingPageHero
+     * @return Factory|View
      */
     public function edit(LandingPageHero $landingPageHero): Factory|View
     {
-        return view('pages.landingPageHeroes.edit', [
-            'landingPageHero' => $landingPageHero,
-        ]);
+        return view('pages.landingPageHeroes.edit', compact('landingPageHero'));
     }
 
     /**
-     * Mettre à jour un héros de landing page.
+     * Mettre à jour un héros existant.
      *
+     * @param Request $request
+     * @param LandingPageHero $landingPageHero
      * @return RedirectResponse
      */
     public function update(Request $request, LandingPageHero $landingPageHero): RedirectResponse
     {
-        $landingPageHero->fill($request->all())->save();
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|string',
+        ]);
 
-        return redirect()->route('landingPageHeroes.show', $landingPageHero->id)
-            ->with('message', 'LandingPageHero successfully updated');
+        $landingPageHero->update($request->all());
+
+        return redirect()->route('landingpageheroes.show', $landingPageHero->id)
+            ->with('message', 'Héros mis à jour avec succès.');
     }
 
     /**
-     * Supprimer un héros de landing page.
+     * Supprimer un héros.
      *
+     * @param LandingPageHero $landingPageHero
      * @return RedirectResponse
      */
     public function destroy(LandingPageHero $landingPageHero): RedirectResponse
     {
         $landingPageHero->delete();
-        return redirect()->route('landingPageHeroes.index')
-            ->with('message', 'LandingPageHero successfully destroyed');
+
+        return redirect()->route('landingpageheroes.index')
+            ->with('message', 'Héros supprimé avec succès.');
     }
 }
