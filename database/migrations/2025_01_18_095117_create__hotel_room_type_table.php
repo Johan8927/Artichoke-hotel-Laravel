@@ -4,29 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+return new class extends Migration {
+    public function up()
     {
-        Schema::create('_hotel_room_type', function (Blueprint $table) {
+        Schema::create('hotel_room_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('content');
+            $table->text('content');
             $table->integer('capacity');
-            $table->float('price');
-            $table->integer('room_type_pictures_id');
+            $table->decimal('price', 10, 2);
+            $table->foreignId('room_type_pictures_id')
+                ->constrained('pictures') // Table de référence
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('_hotel_room_type');
+        Schema::dropIfExists('hotel_room_types');
     }
 };

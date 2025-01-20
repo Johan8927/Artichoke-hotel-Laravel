@@ -2,27 +2,24 @@
 
 namespace Database\Factories;
 
+use App\Models\Room;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Room>
- */
 class RoomFactory extends Factory
 {
+    protected $model = Room::class;
+
     /**
      * Define the model's default state.
-     *
-     * @return array<string, mixed>
      */
     public function definition(): array
     {
         return [
-
-            'id_Room' => $this->faker->unique()->randomNumber(5),
-            'id_RoomType' => $this->faker->unique()->randomNumber(5),
-            'id_Hotel' => $this->faker->unique()->randomNumber(5),
-            'RoomNumber' => $this->faker->unique()->randomNumber(5),
-
+            'name' => $this->faker->word(), // Nom aléatoire
+            'description' => $this->faker->sentence(), // Description aléatoire
+            'price' => $this->faker->randomFloat(2, 50, 500), // Prix entre 50 et 500
+            'capacity' => $this->faker->numberBetween(1, 6), // Capacité entre 1 et 6
+            'hotel_id' => 1, // Utilisez un ID d'hôtel existant ou ajoutez une logique pour le générer dynamiquement
         ];
     }
 }

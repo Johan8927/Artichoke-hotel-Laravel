@@ -2,17 +2,16 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Room;
 
-class HotelRoomsSeeder extends Seeder
+class HotelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        // Crée 5 chambres avec des données aléatoires
-        Room::factory()->count(5)->create();
+        //
     }
 }

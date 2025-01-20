@@ -14,9 +14,11 @@ class LandingPageHeroSeeder extends Seeder
     public function run(): void
     {
         LandingPageHero::factory(1)->create(
-            ['section-name'=>'Hotel Artichaut',
-                'section_content'=>'An escape to the gorgeous lavender fields',
-                'picture_id'=>1,
+            ['section_name' => 'ut',
+                'section_content' => 'An escape to the gorgeous lavender fields',
+                'picture_id' => 1,
+                'updated_at' => now(),
+                'created_at' => now(),
                 ]
         );
     }

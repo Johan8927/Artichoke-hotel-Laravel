@@ -15,7 +15,7 @@ use LaraCrud\Crud\Controller;
 class HotelController extends Controller
 {
        /**
-     * Display a listing of Hotel
+     * Display a listing of HotelSeeder
      *
      * @return View|Factory
      */
@@ -28,7 +28,7 @@ class HotelController extends Controller
     }
 
    /**
-     * Display the specified Hotel.
+     * Display the specified HotelSeeder.
      *
      * @return View|Factory
      */
@@ -41,7 +41,7 @@ class HotelController extends Controller
     }
 
    /**
-     * Show the form for creating a new Hotel.
+     * Show the form for creating a new HotelSeeder.
      *
      * @return View|Factory
      */
@@ -54,7 +54,7 @@ class HotelController extends Controller
     }
 
     /**
-     * Store a newly created Hotel in storage.
+     * Store a newly created HotelSeeder in storage.
      *
      * @return RedirectResponse
      */
@@ -63,11 +63,11 @@ class HotelController extends Controller
           $hotel = new Hotel;
 		$hotel->fill($request->all())->save();
 
-         return redirect()->route('hotels.show',$hotel->id)->with('message','Hotel successfully store');
+         return redirect()->route('hotels.show',$hotel->id)->with('message','HotelSeeder successfully store');
     }
 
    /**
-     * Show the form for editing the specified Hotel.
+     * Show the form for editing the specified HotelSeeder.
      *
      * @return View|Factory
      */
@@ -80,7 +80,7 @@ class HotelController extends Controller
     }
 
     /**
-     * Update the specified Hotel in storage.
+     * Update the specified HotelSeeder in storage.
      *
      * @return RedirectResponse
      */
@@ -88,18 +88,18 @@ class HotelController extends Controller
     {
           $hotel->fill($request->all())->save();
 
-         return redirect()->route('hotels.show',$hotel->id)->with('message','Hotel successfully update');
+         return redirect()->route('hotels.show',$hotel->id)->with('message','HotelSeeder successfully update');
     }
 
     /**
-     * Remove the specified Hotel from storage.
+     * Remove the specified HotelSeeder from storage.
      *
      * @return RedirectResponse
      */
     public function destroy(Hotel $hotel): RedirectResponse
     {
           $hotel->delete();
-         return redirect()->route('hotels.index',$hotel->id)->with('message','Hotel successfully destroy');
+         return redirect()->route('hotels.index',$hotel->id)->with('message','HotelSeeder successfully destroy');
     }
 
 }
