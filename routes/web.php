@@ -2,9 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-
-
 
 Route::get('/', function () {
     return view('welcome');
@@ -20,13 +17,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+require __DIR__.'/auth.php';
+Route::resource('landingpagenews','LandingPageNewsController');
 
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-});
+Route::resource('landingpageamenities','LandingPageAmenitiesController');
 
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-require __DIR__ . '/auth.php';
+Route::resource('landingpageheroes','LandingPageHeroController');
+
+Route::resource('hotelroomtypes','HotelRoomTypesController');
+
