@@ -17,7 +17,7 @@ class PicturesFactory extends Factory
         $images = [
             // Image principale de l'hôtel (pour la landingPageHero)
             [
-                'name' => 'Hotel Image',
+                'name' => 'HotelSeeder Image',
                 'path' => 'https://via.placeholder.com/1200x800.png?text=Hotel+Landing+Page', // Image de l'hôtel
             ],
             // Images pour les services (landingPageAmenities)

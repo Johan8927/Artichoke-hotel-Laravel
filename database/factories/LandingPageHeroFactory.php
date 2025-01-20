@@ -4,9 +4,10 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\LandingPageHero;
+use App\Models\Pictures;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\LandingPageHero>
  */
 class LandingPageHeroFactory extends Factory
 {
@@ -17,7 +18,7 @@ class LandingPageHeroFactory extends Factory
         return [
             'section_name' => $this->faker->word,
             'section_content' => $this->faker->sentence(15),
-            'picture_id' => \App\Models\Pictures::factory(),
+            'picture_id' => Pictures::factory(), // Génère une image associée à la clé étrangère
         ];
     }
 }

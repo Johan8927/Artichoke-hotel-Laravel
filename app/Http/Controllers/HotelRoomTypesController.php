@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\HotelRoomTypes;
+use Illuminate\View\View;
 
 
 /**
@@ -18,9 +21,9 @@ class HotelRoomTypesController extends Controller
        /**
      * Display a listing of HotelRoomTypes
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function index(Request $request)
+    public function index(Request $request): Factory|View
     {
           $builder = HotelRoomTypes::query();
         return view('pages.hotelRoomTypes.index', [
@@ -31,11 +34,11 @@ class HotelRoomTypesController extends Controller
    /**
      * Display the specified HotelRoomTypes.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function show(HotelRoomTypes $hotelRoomTypes)
+    public function show(HotelRoomTypes $hotelRoomTypes): Factory|View
     {
-          
+
         return view('pages.hotelRoomTypes.show', [
 		'hotelRoomTypes' => $hotelRoomTypes,
 ]);
@@ -44,11 +47,11 @@ class HotelRoomTypesController extends Controller
    /**
      * Show the form for creating a new HotelRoomTypes.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function create()
+    public function create(): Factory|View
     {
-          
+
         return view('pages.hotelRoomTypes.create', [
 		'hotelRoomTypes' => new HotelRoomTypes,
 ]);
@@ -57,9 +60,9 @@ class HotelRoomTypesController extends Controller
     /**
      * Store a newly created HotelRoomTypes in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
           $hotelRoomTypes = new HotelRoomTypes;
 		$hotelRoomTypes->fill($request->all())->save();
@@ -70,11 +73,11 @@ class HotelRoomTypesController extends Controller
    /**
      * Show the form for editing the specified HotelRoomTypes.
      *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     * @return View|Factory
      */
-    public function edit(HotelRoomTypes $hotelRoomTypes)
+    public function edit(HotelRoomTypes $hotelRoomTypes): Factory|View
     {
-          
+
         return view('pages.hotelRoomTypes.edit', [
 		'hotelRoomTypes' => $hotelRoomTypes,
 ]);
@@ -83,9 +86,9 @@ class HotelRoomTypesController extends Controller
     /**
      * Update the specified HotelRoomTypes in storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request,HotelRoomTypes $hotelRoomTypes)
+    public function update(Request $request,HotelRoomTypes $hotelRoomTypes): RedirectResponse
     {
           $hotelRoomTypes->fill($request->all())->save();
 
@@ -95,9 +98,9 @@ class HotelRoomTypesController extends Controller
     /**
      * Remove the specified HotelRoomTypes from storage.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function destroy(HotelRoomTypes $hotelRoomTypes)
+    public function destroy(HotelRoomTypes $hotelRoomTypes): RedirectResponse
     {
           $hotelRoomTypes->delete();
          return redirect()->route('hotelRoomTypes.index',$hotelRoomTypes->id)->with('message','HotelRoomTypes successfully destroy');
