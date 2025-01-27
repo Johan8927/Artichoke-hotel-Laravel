@@ -2,104 +2,129 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use App\Models\Hotel;
-use Illuminate\View\View;
-use LaraCrud\Crud\Controller;
-
-
-
 
 class HotelController extends Controller
 {
-       /**
-     * Display a listing of HotelSeeder
+    /**
+     * Affiche une liste paginée des hôtels.
      *
+     * @param Request $request
      * @return View|Factory
      */
     public function index(Request $request): Factory|View
     {
-          $builder = Hotel::query();
-        return view('pages.hotels.index', [
-		'hotels' => $builder->paginate(10),
-]);
+        // Récupérer les hôtels avec pagination
+        $hotels = Hotel::paginate(10);
+
+        // Retourner la vue avec les hôtels
+        return view('pages.hotels.index', compact('hotels'));
     }
 
-   /**
-     * Display the specified HotelSeeder.
+    /**
+     * Affiche un hôtel spécifique.
      *
+     * @param Hotel $hotel
      * @return View|Factory
      */
     public function show(Hotel $hotel): Factory|View
     {
-
-        return view('pages.hotels.show', [
-		'hotel' => $hotel,
-]);
+        // Retourner la vue avec l'hôtel spécifique
+        return view('pages.hotels.show', compact('hotel'));
     }
 
-   /**
-     * Show the form for creating a new HotelSeeder.
+    /**
+     * Affiche le formulaire pour créer un nouvel hôtel.
      *
      * @return View|Factory
      */
     public function create(): Factory|View
     {
-
-        return view('pages.hotels.create', [
-		'hotel' => new Hotel,
-]);
+        // Retourner la vue avec une instance vide de l'hôtel
+        return view('pages.hotels.create', ['hotel' => new Hotel]);
     }
 
     /**
-     * Store a newly created HotelSeeder in storage.
+     * Enregistre un nouvel hôtel dans la base de données.
      *
+     * @param Request $request
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
     {
-          $hotel = new Hotel;
-		$hotel->fill($request->all())->save();
+        // Valider les données de la requête
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'ZIP_code' => 'required|string|max:10',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+        ]);
 
-         return redirect()->route('hotels.show',$hotel->id)->with('message','HotelSeeder successfully store');
+        // Créer un nouvel hôtel avec les données validées
+        $hotel = Hotel::create($validated);
+
+        // Rediriger vers la page de l'hôtel avec un message de succès
+        return redirect()->route('hotels.show', $hotel->id)->with('message', 'Hôtel créé avec succès.');
     }
 
-   /**
-     * Show the form for editing the specified HotelSeeder.
+    /**
+     * Affiche le formulaire pour modifier un hôtel existant.
      *
+     * @param Hotel $hotel
      * @return View|Factory
      */
     public function edit(Hotel $hotel): Factory|View
     {
-
-        return view('pages.hotels.edit', [
-		'hotel' => $hotel,
-]);
+        // Retourner la vue avec l'hôtel à modifier
+        return view('pages.hotels.edit', compact('hotel'));
     }
 
     /**
-     * Update the specified HotelSeeder in storage.
+     * Met à jour un hôtel dans la base de données.
      *
+     * @param Request $request
+     * @param Hotel $hotel
      * @return RedirectResponse
      */
-    public function update(Request $request,Hotel $hotel): RedirectResponse
+    public function update(Request $request, Hotel $hotel): RedirectResponse
     {
-          $hotel->fill($request->all())->save();
+        // Valider les données de la requête
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'ZIP_code' => 'required|string|max:10',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15',
+            'email' => 'required|email|max:255',
+        ]);
 
-         return redirect()->route('hotels.show',$hotel->id)->with('message','HotelSeeder successfully update');
+        // Mettre à jour l'hôtel avec les données validées
+        $hotel->update($validated);
+
+        // Rediriger vers la page de l'hôtel avec un message de succès
+        return redirect()->route('hotels.show', $hotel->id)->with('message', 'Hôtel mis à jour avec succès.');
     }
 
     /**
-     * Remove the specified HotelSeeder from storage.
+     * Supprime un hôtel de la base de données.
      *
+     * @param Hotel $hotel
      * @return RedirectResponse
      */
     public function destroy(Hotel $hotel): RedirectResponse
     {
-          $hotel->delete();
-         return redirect()->route('hotels.index',$hotel->id)->with('message','HotelSeeder successfully destroy');
-    }
+        // Supprimer l'hôtel
+        $hotel->delete();
 
+        // Rediriger vers la liste des hôtels avec un message de succès
+        return redirect()->route('hotels.index')->with('message', 'Hôtel supprimé avec succès.');
+    }
 }

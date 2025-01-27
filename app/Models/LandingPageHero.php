@@ -2,20 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modèle pour représenter les héros de la page d'accueil.
+ */
 class LandingPageHero extends Model
 {
     use HasFactory;
-    protected $table = 'landing_page_hero';
+
+    // Utilise le trait pour les usines de modèles.
+
+    /**
+     * Attributs pouvant être remplis via une requête (mass assignable).
+     */
     protected $fillable = [
-        'section_name',
-        'section_content',
-        'picture_id',
+        'section_name',        // Titre du héros.
+        'section_content',  // Description du héros.
+        'picture_id',        // Chemin ou URL de l'image associée au héros.
     ];
-    public function picture(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Pictures::class);
-    }
 }

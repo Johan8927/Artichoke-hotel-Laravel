@@ -25,9 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PicturesSeeder::class,
             LandingPageNewsSeeder::class,
-            LandingPageAmenitiesSeeder::class,
+            AmenitiesSeeder::class,
             LandingPageHeroSeeder::class,
-            HotelRoomTypeSeeder::class,
+            RoomTypeSeeder::class,
 
         ]);
         // Création de 5 hôtels et leurs chambres associées

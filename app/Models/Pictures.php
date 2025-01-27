@@ -20,6 +20,6 @@ class Pictures extends Model
         return $this->hasMany(LandingPageHero::class);
     }
     public function landingPageAmenities(){
-        return $this->hasMany(LandingPageAmenities::class);
+        return $this->hasMany(Amenities::class);
     }
 }

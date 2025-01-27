@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
     use HasFactory;
+
+    // Les colonnes autorisées pour les insertions ou mises à jour massives
     protected $fillable = [
         'name',
         'address',
@@ -18,41 +20,61 @@ class Hotel extends Model
         'email',
     ];
 
-    // Getter pour l'attribut 'phone_number' - Formater le numéro de téléphone
-    public function getPhoneNumberAttribute($value): array|string|null
+    /**
+     * Getter pour 'phone_number' : Formater le numéro de téléphone.
+     * Exemple : 0123456789 devient 01-23-45-67-89
+     */
+    public function getPhoneNumberAttribute($value): ?string
     {
-        // Exemple de formatage de numéro de téléphone
-        return preg_replace('/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/', '$1-$2-$3-$4-$5', $value);
+        if ($value) {
+            // Formater le numéro en groupes de deux chiffres séparés par des tirets
+            return preg_replace('/(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/', '$1-$2-$3-$4-$5', $value);
+        }
+        return null;
     }
 
-    // Setter pour l'attribut 'phone_number' - Assurer que le numéro de téléphone est bien formaté (enlever les espaces ou caractères spéciaux)
+    /**
+     * Setter pour 'phone_number' : Nettoyer les caractères non numériques.
+     */
     public function setPhoneNumberAttribute($value): void
     {
-        // Enlever tous les caractères non numériques pour garder uniquement les chiffres
+        // Garder uniquement les chiffres du numéro de téléphone
         $this->attributes['phone_number'] = preg_replace('/\D/', '', $value);
     }
 
-    // Getter pour l'attribut 'ZIP_code' - Retourner le code postal sous un format spécifique (par exemple, avec un espace)
+    /**
+     * Getter pour 'ZIP_code' : Retourner le code postal en majuscules.
+     */
     public function getZIPCodeAttribute($value): string
     {
-        return strtoupper($value);  // Formate le code postal en majuscules
+        // Formater le code postal en majuscules (par sécurité)
+        return strtoupper($value);
     }
 
-    // Setter pour l'attribut 'email' - Valider l'email avant de le sauvegarder
+    /**
+     * Setter pour 'email' : Nettoyer et normaliser l'adresse e-mail.
+     */
     public function setEmailAttribute($value): void
     {
-        $this->attributes['email'] = strtolower(trim($value));  // Mettre l'email en minuscule et enlever les espaces
+        // Supprimer les espaces inutiles et convertir l'adresse en minuscule
+        $this->attributes['email'] = strtolower(trim($value));
     }
 
-    // Getter pour l'attribut 'name' - Formater le nom de l'hôtel avec une première lettre majuscule
+    /**
+     * Getter pour 'name' : Formater chaque mot avec une majuscule.
+     */
     public function getNameAttribute($value): string
     {
-        return ucwords(strtolower($value));  // Première lettre de chaque mot en majuscule
+        // Mettre la première lettre de chaque mot en majuscule
+        return ucwords(strtolower($value));
     }
 
-    // Setter pour l'attribut 'address' - S'assurer qu'il n'y a pas d'espaces inutiles
+    /**
+     * Setter pour 'address' : Nettoyer les espaces inutiles dans l'adresse.
+     */
     public function setAddressAttribute($value): void
     {
-        $this->attributes['address'] = trim($value);  // Enlever les espaces en début et fin de chaîne
+        // Supprimer les espaces en début et en fin de chaîne
+        $this->attributes['address'] = trim($value);
     }
 }
