@@ -22,7 +22,7 @@ class HotelController extends Controller
         $hotels = Hotel::paginate(10);
 
         // Retourner la vue avec les hôtels
-        return view('pages.hotels.index', compact('hotels'));
+        return view('pages.hotel.index', compact('hotels'));
     }
 
     /**
@@ -34,7 +34,7 @@ class HotelController extends Controller
     public function show(Hotel $hotel): Factory|View
     {
         // Retourner la vue avec l'hôtel spécifique
-        return view('pages.hotels.show', compact('hotel'));
+        return view('pages.hotel.show', compact('hotel'));
     }
 
     /**
@@ -45,7 +45,7 @@ class HotelController extends Controller
     public function create(): Factory|View
     {
         // Retourner la vue avec une instance vide de l'hôtel
-        return view('pages.hotels.create', ['hotel' => new Hotel]);
+        return view('pages.hotel.create', ['hotel' => new Hotel]);
     }
 
     /**
@@ -71,7 +71,7 @@ class HotelController extends Controller
         $hotel = Hotel::create($validated);
 
         // Rediriger vers la page de l'hôtel avec un message de succès
-        return redirect()->route('hotels.show', $hotel->id)->with('message', 'Hôtel créé avec succès.');
+        return redirect()->route('hotel.show', $hotel->id)->with('message', 'Hôtel créé avec succès.');
     }
 
     /**
@@ -83,7 +83,7 @@ class HotelController extends Controller
     public function edit(Hotel $hotel): Factory|View
     {
         // Retourner la vue avec l'hôtel à modifier
-        return view('pages.hotels.edit', compact('hotel'));
+        return view('pages.hotel.edit', compact('hotel'));
     }
 
     /**

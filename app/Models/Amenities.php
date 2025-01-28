@@ -20,4 +20,15 @@ class Amenities extends Model
     {
         return $this->belongsTo(Pictures::class);
     }
+
+    public function getFillable(): array
+    {
+        return $this->fillable;
+    }
+
+    public function setFillable(array $fillable): void
+    {
+        $this->fillable = $fillable;
+    }
+
 }

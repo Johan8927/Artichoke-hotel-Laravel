@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\RoomTypes;
 use Illuminate\View\View;
 
@@ -21,7 +20,7 @@ class RoomTypesController extends Controller
     {
         $roomTypes = RoomTypes::paginate(10);
 
-        return view('pages.hotelRoomTypes.index', compact('roomTypes'));
+        return view('pages.roomTypes.index', compact('roomTypes'));
     }
 
     /**
@@ -32,7 +31,7 @@ class RoomTypesController extends Controller
      */
     public function show(RoomTypes $roomType): Factory|View
     {
-        return view('pages.hotelRoomTypes.show', compact('roomType'));
+        return view('pages.roomTypes.show', compact('roomType'));
     }
 
     /**
@@ -42,7 +41,7 @@ class RoomTypesController extends Controller
      */
     public function create(): Factory|View
     {
-        return view('pages.hotelRoomTypes.create', [
+        return view('pages.roomTypes.create', [
             'roomType' => new RoomTypes,
         ]);
     }
@@ -78,7 +77,7 @@ class RoomTypesController extends Controller
      */
     public function edit(RoomTypes $roomType): Factory|View
     {
-        return view('pages.hotelRoomTypes.edit', compact('roomType'));
+        return view('pages.roomTypes.edit', compact('roomType'));
     }
 
     /**

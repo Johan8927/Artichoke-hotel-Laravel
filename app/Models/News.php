@@ -5,28 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class RoomTypes extends Model
+class News extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
-        'name',
-        'Description',
-        'Maximumcapacity',
-        'price',
+        'section_name',
+        'section_content',
     ];
 
-    // Relation avec la table 'pictures' pour l'image de la chambre
-    public function picture()
-    {
-        return $this->belongsTo(Pictures::class, 'room_type_pictures_id');
-    }
+    /**
+     * @return string[]
+     */
     public function getFillable(): array
     {
         return $this->fillable;
     }
+
+    /**
+     * @param string[] $fillable
+     */
     public function setFillable(array $fillable): void
     {
         $this->fillable = $fillable;
     }
+
 }

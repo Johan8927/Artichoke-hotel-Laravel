@@ -15,11 +15,12 @@ class Pictures extends Model
         'path',
     ];
 
-    public function landingPageHeroes()
+    public function getFillable(): array
     {
-        return $this->hasMany(LandingPageHero::class);
+        return $this->fillable;
     }
-    public function landingPageAmenities(){
-        return $this->hasMany(Amenities::class);
+    public function setFillable(array $fillable): void
+    {
+        $this->fillable = $fillable;
     }
 }
