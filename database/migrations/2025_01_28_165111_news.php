@@ -11,6 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create('news', function (Blueprint $table) {
+            $table->id();
+            $table->string('section_name');
+            $table->text('section_content');
+            $table->string('section_type');
+            $table->timestamps();
+        });
         //
     }
 
@@ -19,6 +26,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('news');
         //
     }
 };

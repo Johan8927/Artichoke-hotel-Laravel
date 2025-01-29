@@ -12,6 +12,7 @@ class News extends Model
 
     protected $fillable = [
         'section_name',
+        'section_type',
         'section_content',
     ];
 

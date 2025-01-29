@@ -11,11 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('amenities', function (Blueprint $table) {
+        Schema::create('hotel', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('icon')->nullable();
-            $table->timestamps();
+            $table->string('address');
+            $table->string('zip_code');
+            $table->string('city');
+            $table->string('country');
+            $table->string('phone_number');
+            $table->string('email');
+
         });
         //
     }
@@ -25,6 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('hotel');
         //
     }
 };

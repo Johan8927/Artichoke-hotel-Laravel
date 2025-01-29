@@ -11,8 +11,8 @@ class Amenities extends Model
 
     protected $fillable = [
         'name',
-        'content',
         'id_picture',
+        'content',
     ];
 
 
