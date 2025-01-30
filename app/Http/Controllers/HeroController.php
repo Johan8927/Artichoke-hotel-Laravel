@@ -20,12 +20,12 @@ class HeroController extends Controller
      */
     public function index(): Factory|View
     {
-        $landingPageHeroes = Hero::all();
-        $rooms = Room::limit(3)->get();
-        $news = News::limit(3)->get();
-        $heroPicture = Pictures::where('name', 'HotelSeeder Exterior')->first();
+        $heroes = Hero::all();
+        $news = News::all();
+        $rooms = Room::all();
+        $pictures = Pictures::all();
 
-        return view('pages.hero.index', compact('landingPageHeroes', 'rooms', 'news', 'heroPicture'));
+        return view('pages.hero.index', compact('heroes', 'news', 'rooms', 'pictures'));
     }
 
     /**
@@ -46,7 +46,7 @@ class HeroController extends Controller
      */
     public function create(): Factory|View
     {
-        return view('pages.heroes.create');
+        return view('pages.hero.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class HeroController extends Controller
 
         $hero = Hero::create($request->all());
 
-        return redirect()->route('heroes.show', $hero->id)
+        return redirect()->route('hero.show', $hero->id)
             ->with('message', 'Héros créé avec succès.');
     }
 
@@ -77,7 +77,7 @@ class HeroController extends Controller
      */
     public function edit(Hero $hero): Factory|View
     {
-        return view('pages.heroes.edit', compact('hero'));
+        return view('pages.hero.edit', compact('hero'));
     }
 
     /**
@@ -97,7 +97,7 @@ class HeroController extends Controller
 
         $hero->update($request->all());
 
-        return redirect()->route('heroes.show', $hero->id)
+        return redirect()->route('hero.show', $hero->id)
             ->with('message', 'Héros mis à jour avec succès.');
     }
 
@@ -111,7 +111,7 @@ class HeroController extends Controller
     {
         $hero->delete();
 
-        return redirect()->route('heroes.index')
+        return redirect()->route('hero.index')
             ->with('message', 'Héros supprimé avec succès.');
     }
 }
