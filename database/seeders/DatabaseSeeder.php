@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             NewsSeeder::class,
             HeroesSeeder::class,
             PicturesSeeder::class,
-            RoomsPicturesSeeder::class,
+            RoomsTypePicturesSeeder::class,
             RoomsSeeder::class,
         ]);
     }

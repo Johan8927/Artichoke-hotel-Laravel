@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('amenities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('id_pictures')->nullable()->constrained('pictures')->onDelete('set null'); // Vérifie bien cette clé étrangère
-            $table->string('content');
+            $table->unsignedBigInteger('id_picture'); // Assurez-vous que cette colonne est définie
+            $table->text('content');
             $table->timestamps();
+
+            // Si c'est une clé étrangère
+            $table->foreign('id_picture')->references('id')->on('pictures')->onDelete('cascade');
         });
+
 
 
         //

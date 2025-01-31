@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
-class RoomsPicturesSeeder
+use App\Models\RoomsTypePicture;
+
+class RoomsTypePicturesSeeder
 {
     /**
      * Exécuter les seeders.
@@ -12,7 +14,7 @@ class RoomsPicturesSeeder
     public function run(): void
     {
         // Créer 20 images de chambres aléatoires
-        RoomsPictures::factory()->count(20)->create();
+        RoomsTypePicture::factory()->count(20)->create();
     }
 
 }

@@ -22,10 +22,9 @@ class AmenitiesFactory extends Factory
     public function definition()
     {
         return [
-			"section_name" => $this->faker->words(5,true),
-			"section_content" => $this->faker->words(5,true),
-			"price" => $this->faker->randomNumber(),
-			"picture_id" => $this->faker->randomNumber(),
+            'name' => $this->faker->word,
+            'id_picture' => $this->faker->numberBetween(1, 10),
+            'content' => $this->faker->sentence(10),
 
         ];
     }
