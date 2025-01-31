@@ -96,7 +96,7 @@ return [
         ],
     ],
     'factory' => [
-        'namespace' => 'Database\Factories',
+        'namespace' => 'database\Factories',
         'suffix' => 'Factory',
     ],
     'view' => [

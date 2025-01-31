@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\RoomsType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomsTypesFactory extends Factory
+class RoomsTypeFactory extends Factory
 {
     /**
      * Le nom du modèle associé à ce factory.

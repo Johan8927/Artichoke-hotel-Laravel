@@ -16,7 +16,7 @@ class Amenities extends Model
     ];
 
 
-    public function picture()
+    public function picture(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Pictures::class);
     }

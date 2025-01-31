@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('amenities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('id_picture')->nullable()->constrained('pictures')->onDelete('set null'); // Vérifie bien cette clé étrangère
+            $table->foreignId('id_pictures')->nullable()->constrained('pictures')->onDelete('set null'); // Vérifie bien cette clé étrangère
             $table->string('content');
             $table->timestamps();
         });
