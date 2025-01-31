@@ -6,22 +6,27 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Modèle pour représenter les héros de la page d'accueil.
+ * Modèle pour représenter les chambres.
  */
-class Hero extends Model
+class Rooms extends Model
 {
     use HasFactory;
-
-    // Utilise le trait pour les usines de modèles.
 
     /**
      * Attributs pouvant être remplis via une requête (mass assignable).
      */
     protected $fillable = [
-        'section_name',        // Titre du héros.
-        'section_content',  // Description du héros.
-        'picture_id',        // Chemin ou URL de l'image associée au héros.
+        'id_RoomType',         // Nom de la chambre.
+        'id_Hotel',  // Description de la chambre.
+        'RoomNumber',        // Prix de la chambre.
     ];
+
+    public static function limit(int $int): \LaravelIdea\Helper\App\Models\_IH_Room_C|array|\Closure|Rooms|null
+    {
+
+        return self::select('id_RoomType', 'id_Hotel', 'RoomNumber')->limit($int)->get($keys = null);
+
+    }
 
     public function getFillable(): array
     {
@@ -32,5 +37,6 @@ class Hero extends Model
     {
         $this->fillable = $fillable;
     }
+
 
 }

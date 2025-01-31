@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\RoomTypes;
+use App\Models\RoomsType;
 use Illuminate\View\View;
 
-class RoomTypesController extends Controller
+class RoomsTypeController extends Controller
 {
     /**
      * Affiche une liste paginée des types de chambres.
@@ -18,7 +18,7 @@ class RoomTypesController extends Controller
      */
     public function index(Request $request): Factory|View
     {
-        $roomTypes = RoomTypes::paginate(10);
+        $roomTypes = RoomsType::paginate(10);
 
         return view('pages.roomTypes.index', compact('roomTypes'));
     }
@@ -26,10 +26,10 @@ class RoomTypesController extends Controller
     /**
      * Affiche un type de chambre spécifique.
      *
-     * @param RoomTypes $roomType
+     * @param RoomsType $roomType
      * @return View|Factory
      */
-    public function show(RoomTypes $roomType): Factory|View
+    public function show(RoomsType $roomType): Factory|View
     {
         return view('pages.roomTypes.show', compact('roomType'));
     }
@@ -42,7 +42,7 @@ class RoomTypesController extends Controller
     public function create(): Factory|View
     {
         return view('pages.roomTypes.create', [
-            'roomType' => new RoomTypes,
+            'roomType' => new RoomsType,
         ]);
     }
 
@@ -63,7 +63,7 @@ class RoomTypesController extends Controller
         ]);
 
         // Créer le type de chambre
-        $roomType = RoomTypes::create($validated);
+        $roomType = RoomsType::create($validated);
 
         return redirect()->route('hotelRoomTypes.show', $roomType->id)
             ->with('message', 'Type de chambre créé avec succès.');
@@ -72,10 +72,10 @@ class RoomTypesController extends Controller
     /**
      * Affiche le formulaire pour modifier un type de chambre existant.
      *
-     * @param RoomTypes $roomType
+     * @param RoomsType $roomType
      * @return View|Factory
      */
-    public function edit(RoomTypes $roomType): Factory|View
+    public function edit(RoomsType $roomType): Factory|View
     {
         return view('pages.roomTypes.edit', compact('roomType'));
     }
@@ -84,10 +84,10 @@ class RoomTypesController extends Controller
      * Met à jour un type de chambre existant dans la base de données.
      *
      * @param Request $request
-     * @param RoomTypes $roomType
+     * @param RoomsType $roomType
      * @return RedirectResponse
      */
-    public function update(Request $request, RoomTypes $roomType): RedirectResponse
+    public function update(Request $request, RoomsType $roomType): RedirectResponse
     {
         // Valider les données de la requête
         $validated = $request->validate([
@@ -107,10 +107,10 @@ class RoomTypesController extends Controller
     /**
      * Supprime un type de chambre de la base de données.
      *
-     * @param RoomTypes $roomType
+     * @param RoomsType $roomType
      * @return RedirectResponse
      */
-    public function destroy(RoomTypes $roomType): RedirectResponse
+    public function destroy(RoomsType $roomType): RedirectResponse
     {
         $roomType->delete();
 

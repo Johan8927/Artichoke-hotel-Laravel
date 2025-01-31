@@ -2,16 +2,16 @@
 
 namespace Database\Factories;
 
-use App\Models\Hero;
+use App\Models\Heroes;
 use App\Models\Pictures;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<Hero>
+ * @extends Factory<Heroes>
  */
-class HeroFactory extends Factory
+class HeroesFactory extends Factory
 {
-    protected $model = Hero::class;
+    protected $model = Heroes::class;
 
     public function definition(): array
     {

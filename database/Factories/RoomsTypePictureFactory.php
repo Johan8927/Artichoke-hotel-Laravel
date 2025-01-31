@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\RoomTypePicture;
+use App\Models\RoomsTypePicture;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomTypePictureFactory extends Factory
+class RoomsTypePictureFactory extends Factory
 {
-    protected $model = RoomTypePicture::class;
+    protected $model = RoomsTypePicture::class;
 
     public function definition(): array
     {

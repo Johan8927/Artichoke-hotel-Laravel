@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Hero;
-use Illuminate\Database\Seeder;
-
-class HeroSeeder extends Seeder
+class RoomsPicturesSeeder
 {
     /**
      * Exécuter les seeders.
@@ -14,6 +11,8 @@ class HeroSeeder extends Seeder
      */
     public function run(): void
     {
-        Hero::factory()->count(10)->create();
+        // Créer 20 images de chambres aléatoires
+        RoomsPictures::factory()->count(20)->create();
     }
+
 }

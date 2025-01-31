@@ -2,12 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Room;
+use App\Models\Rooms;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomFactory extends Factory
+class RoomsFactory extends Factory
 {
-    protected $model = Room::class;
+    protected $model = Rooms::class;
 
     /**
      * Définir l'état par défaut du modèle.
@@ -15,9 +15,10 @@ class RoomFactory extends Factory
      * @return array
      */
     public function definition(): array
+
     {
         return [
-            'id_RoomType' => $this->faker->numberBetween(1, 5), // ID de type de chambre aléatoire (à ajuster selon vos RoomTypes existants)
+            'id_RoomType' => $this->faker->numberBetween(1, 5), // ID de type de chambre aléatoire (à ajuster selon vos RoomsType existants)
             'id_Hotel' => $this->faker->numberBetween(1, 10), // ID d'hôtel aléatoire (à ajuster selon vos hôtels existants)
             'RoomNumber' => $this->faker->unique()->numberBetween(1, 500), // Numéro de chambre unique
             'name' => $this->faker->word(), // Nom aléatoire de la chambre

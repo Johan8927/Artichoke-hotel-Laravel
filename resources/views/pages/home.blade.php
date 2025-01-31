@@ -18,64 +18,76 @@
         <!-- Section Héros -->
         <section class="mt-8">
             <h2 class="text-xl font-bold mb-4">Héros</h2>
-            <table class="w-full border-collapse border border-gray-300">
-                <thead>
-                <tr class="bg-gray-200">
-                    <th class="border border-gray-300 px-4 py-2">Nom</th>
-                    <th class="border border-gray-300 px-4 py-2">Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($heroes as $hero)
-                    <tr>
-                        <td class="border border-gray-300 px-4 py-2">{{ $hero->name }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $hero->description }}</td>
+            @if($heroes->isNotEmpty())
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-4 py-2">Nom</th>
+                        <th class="border border-gray-300 px-4 py-2">Description</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($heroes as $hero)
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">{{ $hero->name }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $hero->description }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>Aucun héros disponible.</p>
+            @endif
         </section>
 
         <!-- Section Commodités (Amenities) -->
         <section class="mt-8">
             <h2 class="text-xl font-bold mb-4">Commodités</h2>
-            <table class="w-full border-collapse border border-gray-300">
-                <thead>
-                <tr class="bg-gray-200">
-                    <th class="border border-gray-300 px-4 py-2">Nom</th>
-                    <th class="border border-gray-300 px-4 py-2">Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($amenities as $amenity)
-                    <tr>
-                        <td class="border border-gray-300 px-4 py-2">{{ $amenity->name }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $amenity->description }}</td>
+            @if($amenities->isNotEmpty())
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-4 py-2">Nom</th>
+                        <th class="border border-gray-300 px-4 py-2">Description</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($amenities as $amenity)
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">{{ $amenity->name }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $amenity->description }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>Aucune commodité disponible.</p>
+            @endif
         </section>
 
         <!-- Section Actualités (News) -->
         <section class="mt-8">
             <h2 class="text-xl font-bold mb-4">Actualités</h2>
-            <table class="w-full border-collapse border border-gray-300">
-                <thead>
-                <tr class="bg-gray-200">
-                    <th class="border border-gray-300 px-4 py-2">Titre</th>
-                    <th class="border border-gray-300 px-4 py-2">Contenu</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($news as $article)
-                    <tr>
-                        <td class="border border-gray-300 px-4 py-2">{{ $article->title }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $article->content }}</td>
+            @if($news->isNotEmpty())
+                <table class="w-full border-collapse border border-gray-300">
+                    <thead>
+                    <tr class="bg-gray-200">
+                        <th class="border border-gray-300 px-4 py-2">Titre</th>
+                        <th class="border border-gray-300 px-4 py-2">Contenu</th>
                     </tr>
-                @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    @foreach($news as $article)
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">{{ $article->title }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $article->content }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            @else
+                <p>Aucune actualité disponible.</p>
+            @endif
         </section>
     </div>
 @endsection

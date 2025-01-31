@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Database\Factories\RoomTypePictureFactory;
+use Database\Factories\RoomsTypePictureFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoomTypePicture extends Model
+class RoomsTypePicture extends Model
 {
     use HasFactory;
 
@@ -22,7 +22,7 @@ class RoomTypePicture extends Model
 
     public function roomType()
     {
-        return $this->belongsTo(RoomType::class);
+        return $this->belongsTo(RoomsType::class);
     }
 
     public function getFillable(): array

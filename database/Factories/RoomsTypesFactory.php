@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\RoomTypes;
+use App\Models\RoomsType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RoomTypesFactory extends Factory
+class RoomsTypesFactory extends Factory
 {
     /**
      * Le nom du modèle associé à ce factory.
      *
      * @var string
      */
-    protected $model = RoomTypes::class;
+    protected $model = RoomsType::class;
 
     /**
      * Définir les valeurs par défaut pour les champs du modèle.

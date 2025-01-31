@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Room;
+use App\Models\Rooms;
 
 class RoomsSeeder extends Seeder
 {
@@ -13,6 +13,6 @@ class RoomsSeeder extends Seeder
     public function run(): void
     {
         // Crée 5 chambres avec des données aléatoires
-        Room::factory()->count(5)->create();
+        Rooms::factory()->count(5)->create();
     }
 }

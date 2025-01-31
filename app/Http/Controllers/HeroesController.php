@@ -6,12 +6,12 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Models\Hero;
+use App\Models\Heroes;
 use App\Models\News;
-use App\Models\Room;
+use App\Models\Rooms;
 use App\Models\Pictures;
 
-class HeroController extends Controller
+class HeroesController extends Controller
 {
     /**
      * Afficher la page principale avec les données nécessaires.
@@ -20,9 +20,9 @@ class HeroController extends Controller
      */
     public function index(): Factory|View
     {
-        $heroes = Hero::all();
+        $heroes = Heroes::all();
         $news = News::all();
-        $rooms = Room::all();
+        $rooms = Rooms::all();
         $pictures = Pictures::all();
 
         return view('pages.hero.index', compact('heroes', 'news', 'rooms', 'pictures'));
@@ -31,10 +31,10 @@ class HeroController extends Controller
     /**
      * Afficher un héros spécifique.
      *
-     * @param Hero $hero
+     * @param Heroes $hero
      * @return Factory|View
      */
-    public function show(Hero $hero): Factory|View
+    public function show(Heroes $hero): Factory|View
     {
         return view('pages.hero.show', compact('hero'));
     }
@@ -63,7 +63,7 @@ class HeroController extends Controller
             'picture_id' => 'nullable|integer|exists:pictures,id',
         ]);
 
-        $hero = Hero::create($request->all());
+        $hero = Heroes::create($request->all());
 
         return redirect()->route('hero.show', $hero->id)
             ->with('message', 'Héros créé avec succès.');
@@ -72,10 +72,10 @@ class HeroController extends Controller
     /**
      * Afficher le formulaire pour modifier un héros.
      *
-     * @param Hero $hero
+     * @param Heroes $hero
      * @return Factory|View
      */
-    public function edit(Hero $hero): Factory|View
+    public function edit(Heroes $hero): Factory|View
     {
         return view('pages.hero.edit', compact('hero'));
     }
@@ -84,10 +84,10 @@ class HeroController extends Controller
      * Mettre à jour un héros existant.
      *
      * @param Request $request
-     * @param Hero $hero
+     * @param Heroes $hero
      * @return RedirectResponse
      */
-    public function update(Request $request, Hero $hero): RedirectResponse
+    public function update(Request $request, Heroes $hero): RedirectResponse
     {
         $request->validate([
             'section_name' => 'required|string|max:255',
@@ -104,10 +104,10 @@ class HeroController extends Controller
     /**
      * Supprimer un héros.
      *
-     * @param Hero $hero
+     * @param Heroes $hero
      * @return RedirectResponse
      */
-    public function destroy(Hero $hero): RedirectResponse
+    public function destroy(Heroes $hero): RedirectResponse
     {
         $hero->delete();
 

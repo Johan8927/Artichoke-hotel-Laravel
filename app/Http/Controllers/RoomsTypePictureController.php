@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class RoomTypePictureController extends Controller
+class RoomsTypePictureController extends Controller
 {
 
     public function index()

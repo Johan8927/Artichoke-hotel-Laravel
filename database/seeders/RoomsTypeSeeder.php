@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\RoomTypes;
+use App\Models\RoomsType;
 
-class RoomTypeSeeder extends Seeder
+class RoomsTypeSeeder extends Seeder
 {
     /**
      * Exécute les insertions dans la base de données.
@@ -15,6 +15,6 @@ class RoomTypeSeeder extends Seeder
     public function run(): void
     {
         // Crée 20 types de chambres aléatoires
-        RoomTypes::factory()->count(20)->create();
+        RoomsType::factory()->count(20)->create();
     }
 }
