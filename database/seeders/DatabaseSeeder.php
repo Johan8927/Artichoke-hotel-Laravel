@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
         // Exécuter les autres seeders
         $this->call([
-            RoomsTypeSeeder::class,  // Supprimer le doublon
+            RoomsTypeSeeder::class,
             AmenitiesSeeder::class,
             NewsSeeder::class,
             HeroesSeeder::class,
