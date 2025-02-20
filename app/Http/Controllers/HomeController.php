@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\View\View;
-use App\Models\Heroes;
-use App\Models\Amenities;
-use App\Models\News;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
-     * Afficher la page d'accueil (Landing Page).
+     * Create a new controller instance.
      *
-     * @return Factory|View
+     * @return void
      */
-    public function index(): Factory|View
+    public function __construct()
     {
-        $heroes = Heroes::all();
-        $amenities = Amenities::all();
-        $news = News::all();
+        $this->middleware('auth');
+    }
 
-        return view('pages.home', compact('heroes', 'amenities', 'news'));
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
     }
 }
