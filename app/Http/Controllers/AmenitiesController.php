@@ -20,15 +20,13 @@ class AmenitiesController extends Controller
        /**
      * Display a listing of Amenities
      *
-     * @return View|Factory
-     */
-    public function index(Request $request)
-    {
-          $builder = Amenities::query();
-        return view('pages.amenities.index', [
-		'amenities' => $builder->paginate(10),
-]);
+     * @return \Illuminate\Http\JsonResponse
+        */
+    public function getAllAmenities(){
+        $amenities = Amenities::all();
+        return response()->json($amenities);
     }
+
 
    /**
      * Display the specified Amenities.
