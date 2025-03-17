@@ -194,7 +194,7 @@ return [
         /*
          * Path to web route file
          */
-        'web' => 'routes/web.php',
+        'web' => 'routes/api.php',
 
         /*
          * Path to API route file
