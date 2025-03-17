@@ -6,7 +6,7 @@ import Dashboard from '@/views/Dashboard.vue'; // Page Dashboard après connexio
 const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login },
-    { path: '/dashboard', component: Dashboard },
+    { path: '/dashbo', component: Dashboard },
 ];
 
 const router = createRouter({
