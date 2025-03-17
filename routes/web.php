@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(); // Cela génère les routes d'authentification nécessaires (login, register, logout)
 
 Route::get('/', function () {
-    return view('pages.home');
+    return view('pages.landingPage');
 });
 
 // Authenticated routes
@@ -52,3 +52,8 @@ Route::middleware('auth')->group(function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+Route::get('/{any}', function () {
+    return view('app'); // Assurez-vous que app.blade.php charge bien Vue
+})->where('any', '.*'); // Redirige toutes les requêtes vers Vue
