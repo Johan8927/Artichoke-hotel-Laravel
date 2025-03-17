@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/hero/{hero}', [App\Http\Controllers\HeroesController::class, 'destroy']);
 });
 
+Route::get("/amenities", [App\Http\Controllers\AmenitiesController::class, 'getAllAmenities']);
+
 
 
 Auth::routes();
