@@ -2,105 +2,66 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Amenities;
-use Illuminate\View\View;
-
-
-/**
- * Description of AmenitiesController
- *
- * @author Tuhin Bepari <digitaldreams40@gmail.com>
- */
 
 class AmenitiesController extends Controller
 {
-       /**
-     * Display a listing of Amenities
-     *
-     * @return \Illuminate\Http\JsonResponse
-        */
-    public function getAllAmenities(){
+    // Création
+    public function saveAmenities(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $amenities = new Amenities();
+        $amenities->name = $request->name;
+        $amenities->description = $request->description;
+        $amenities->save();
+
+        return response()->json([
+            'message' => 'Équipement créé avec succès',
+            'data' => $amenities
+        ], 201); // 201 Created
+    }
+
+    // Lecture
+    public function getAllAmenities(): \Illuminate\Http\JsonResponse
+    {
         $amenities = Amenities::all();
-        return response()->json($amenities);
+        return response()->json($amenities, 200); // 200 OK
     }
 
-
-   /**
-     * Display the specified Amenities.
-     *
-     * @return View|Factory
-     */
-    public function show(Amenities $amenities)
+    // Mise à jour
+    public function updateAmenities(Request $request, $id): \Illuminate\Http\JsonResponse
     {
+        $amenities = Amenities::find($id);
+        if (!$amenities) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
 
-        return view('pages.amenities.show', [
-		'amenities' => $amenities,
-]);
+        $amenities->name = $request->name;
+        $amenities->description = $request->description;
+        $amenities->save();
+
+        return response()->json([
+            'message' => 'mis à jour avec succès',
+            'data' => $amenities
+        ], 200); // 200 OK
     }
 
-   /**
-     * Show the form for creating a new Amenities.
-     *
-     * @return View|Factory
-     */
-    public function create()
+    // Suppression
+    public function destroyAmenities($id): \Illuminate\Http\JsonResponse
     {
+        $amenities = Amenities::find($id);
+        if (!$amenities) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
 
-        return view('pages.amenities.create', [
-		'amenities' => new Amenities,
-]);
+        $amenities->delete();
+
+        return response()->json([
+            'message' => 'supprimé avec succès'
+        ], 200); // 200 OK
     }
-
-    /**
-     * Store a newly created Amenities in storage.
-     *
-     * @return RedirectResponse
-     */
-    public function store(Request $request)
-    {
-          $amenities = new Amenities;
-		$amenities->fill($request->all())->save();
-
-         return redirect()->route('amenities.show',$amenities->id)->with('message','Amenities successfully store');
-    }
-
-   /**
-     * Show the form for editing the specified Amenities.
-     *
-     * @return View|Factory
-     */
-    public function edit(Amenities $amenities)
-    {
-
-        return view('pages.amenities.edit', [
-		'amenities' => $amenities,
-]);
-    }
-
-    /**
-     * Update the specified Amenities in storage.
-     *
-     * @return RedirectResponse
-     */
-    public function update(Request $request,Amenities $amenities)
-    {
-          $amenities->fill($request->all())->save();
-
-         return redirect()->route('amenities.show',$amenities->id)->with('message','Amenities successfully update');
-    }
-
-    /**
-     * Remove the specified Amenities from storage.
-     *
-     * @return RedirectResponse
-     */
-    public function destroy(Amenities $amenities)
-    {
-          $amenities->delete();
-         return redirect()->route('amenities.index',$amenities->id)->with('message','Amenities successfully destroy');
-    }
-
 }

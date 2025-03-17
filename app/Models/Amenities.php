@@ -10,11 +10,13 @@ class Amenities extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'name',
         'id_picture',
         'content',
     ];
+
 
     /**
      * Relation "appartient à" avec le modèle Pictures.

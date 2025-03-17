@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Auth;
 // Auth Routes
 Auth::routes(); // Cela génère les routes d'authentification nécessaires (login, register, logout)
 
-Route::get('/', function () {
-    return view('pages.landingPage');
-});
 
 // Authenticated routes
 Route::middleware('auth')->group(function () {

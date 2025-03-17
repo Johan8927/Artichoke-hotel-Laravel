@@ -77,7 +77,8 @@ class HeroesController extends Controller
      */
     public function edit(Heroes $hero): Factory|View
     {
-        return view('pages.hero.edit', compact('hero'));
+
+
     }
 
     /**
