@@ -11,15 +11,15 @@ class RoomsType extends Model
 
     protected $fillable = [
         'name',
-        'Description',
-        'Maximumcapacity',
+        'description',
+        'maximumcapacity',
         'price',
     ];
 
     // Relation avec la table 'pictures' pour l'image de la chambre
-    public function picture()
+    public function picture(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Pictures::class, 'room_type_pictures_id');
+        return $this->belongsTo(Pictures::class, 'rooms_type_pictures_id');
     }
     public function getFillable(): array
     {

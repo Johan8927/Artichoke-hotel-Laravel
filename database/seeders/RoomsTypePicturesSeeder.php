@@ -2,19 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\RoomsTypePicture;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class RoomsTypePicturesSeeder
+class RoomsTypePicturesSeeder extends Seeder
 {
-    /**
-     * Exécuter les seeders.
-     *
-     * @return void
-     */
+
     public function run(): void
     {
-        // Créer 20 images de chambres aléatoires
-        RoomsTypePicture::factory()->count(20)->create();
+        DB::table('rooms_type_pictures')->insert([
+            'id_rooms_type' => 1,
+            'id_pictures' => 1,
+        ]);
     }
 
 }

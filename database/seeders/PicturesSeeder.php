@@ -1,32 +1,26 @@
 <?php
 
-namespace Database\Seeders;
 
+
+
+namespace Database\Seeders;
 use Illuminate\Database\Seeder;
-use App\Models\Pictures;
+use Illuminate\Support\Facades\DB;
 
 class PicturesSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+
+
+    public function run(): void
     {
-        Pictures::create([
-            'name' => 'HotelSeeder Exterior',
-            'path' => 'images/hotel-exterior.jpg',
-        ]);
-
-        Pictures::create([
+        DB::table('pictures')->insert([
             'name' => 'Swimming Pool',
-            'path' => 'images/swimming-pool.jpg',
+            'path' => 'https://cf.bstatic.com/xdata/images/hotel/max1024x768/461795355.jpg?k=194b8762fe4ff926f1004d07aa6e098d9b5be973fe7b626cecfcac458da4cd2f&o=&hp=1',
         ]);
 
-        Pictures::create([
-            'name' => 'Spa and Wellness',
-            'path' => 'images/spa-wellness.jpg',
-        ]);
-
-        Pictures::create([
-            'name' => 'Gym',
-            'path' => 'images/gym.jpg',
-        ]);
+        //
     }
 }

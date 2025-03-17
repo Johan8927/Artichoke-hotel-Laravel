@@ -10,7 +10,7 @@ class RoomsTypePicture extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_room_type',
+        'id_rooms_type',
         'id_picture',
     ];
 

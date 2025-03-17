@@ -16,17 +16,10 @@ class Rooms extends Model
      * Attributs pouvant être remplis via une requête (mass assignable).
      */
     protected $fillable = [
-        'id_RoomType',         // Nom de la chambre.
-        'id_Hotel',  // Description de la chambre.
-        'RoomNumber',        // Prix de la chambre.
+        'id_hotel',
+        'id_rooms_type',
+        'rooms_number',
     ];
-
-    public static function limit(int $int): \LaravelIdea\Helper\App\Models\_IH_Room_C|array|\Closure|Rooms|null
-    {
-
-        return self::select('id_RoomType', 'id_Hotel', 'RoomNumber')->limit($int)->get($keys = null);
-
-    }
 
     public function getFillable(): array
     {

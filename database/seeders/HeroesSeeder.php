@@ -1,19 +1,19 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\Heroes;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class HeroesSeeder extends Seeder
 {
-    /**
-     * Exécuter les seeders.
-     *
-     * @return void
-     */
     public function run(): void
     {
-        Heroes::factory()->count(10)->create();
+        DB::table('heroes')->insert([
+            'section_name' => 'Bienvenue sur notre site',
+            'section_content' => 'Découvrez nos offres de locations de vacances',
+            'picture_id' => 1,
+        ]);
     }
+
 }

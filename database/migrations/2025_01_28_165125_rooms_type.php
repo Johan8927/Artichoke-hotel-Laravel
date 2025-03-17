@@ -1,24 +1,23 @@
 <?php
-// Exemple de migration pour la table rooms_types
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
-    public function up()
+return new class extends Migration {
+    public function up(): void
     {
         Schema::create('rooms_type', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('Description');
-            $table->integer('Maximumcapacity');
+            $table->text('description');
+            $table->integer('maximumcapacity');
             $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }
 
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('rooms_type');
     }

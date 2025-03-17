@@ -2,18 +2,19 @@
 
 namespace Database\Seeders;
 
-use App\Models\News;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class NewsSeeder extends Seeder
 {
-    /**
-     * Exécuter les seeders.
-     *
-     * @return void
-     */
-    public function run(): void
+    public function run()
     {
-        News::factory()->count(10)->create();
+        DB::table('news')->insert([
+            'section_name' => 'News',
+            'section_type' => 'News',
+            'section_content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.',
+        ]);
+
     }
 }
+

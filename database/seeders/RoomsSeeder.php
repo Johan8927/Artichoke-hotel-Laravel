@@ -3,16 +3,18 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Rooms;
+use Illuminate\Support\Facades\DB;
 
 class RoomsSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        // Crée 5 chambres avec des données aléatoires
-        Rooms::factory()->count(5)->create();
+        DB::table('rooms')->insert([
+            'id_rooms_type' => 1,
+            'id_hotel' => 1,
+            'rooms_number' => 101,
+        ]);
+        //
     }
+
 }

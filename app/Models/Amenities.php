@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Amenities extends Model
 {
@@ -15,20 +16,13 @@ class Amenities extends Model
         'content',
     ];
 
-
-    public function picture(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    /**
+     * Relation "appartient à" avec le modèle Pictures.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function picture(): BelongsTo
     {
-        return $this->belongsTo(Pictures::class);
+        return $this->belongsTo(Pictures::class, 'id_picture');
     }
-
-    public function getFillable(): array
-    {
-        return $this->fillable;
-    }
-
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
-    }
-
 }

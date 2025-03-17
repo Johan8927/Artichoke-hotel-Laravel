@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Amenities;
+use Illuminate\Support\Facades\DB;
 
 class AmenitiesSeeder extends Seeder
 {
@@ -12,9 +12,13 @@ class AmenitiesSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // Crée 10 instances de 'Amenities' à l'aide de la factory
-        \App\Models\Amenities::factory(10)->create();
+
+DB::table('amenities')->insert([
+            'name' => 'Swimming Pool',
+            'id_picture' => 1,
+            'content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.',
+        ]);
     }
 }
