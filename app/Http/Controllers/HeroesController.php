@@ -13,106 +13,53 @@ use App\Models\Pictures;
 
 class HeroesController extends Controller
 {
-    /**
-     * Afficher la page principale avec les données nécessaires.
-     *
-     * @return Factory|View
-     */
-    public function index(): Factory|View
+
+    // Create
+    public function saveHero(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'section_name' => 'required|string',
+            'section_content' => 'required|string',
+            'id_picture' => 'required|integer',
+        ]);
+        $hero = new Heroes();
+        $hero->extracted($request, $hero);
+        return response()->json([
+            'message' => 'créé avec succès',
+            'data' => $hero
+        ], 201); // 201 Created
+    }
+
+    // Read
+
+    public function getAllHeroes(): \Illuminate\Http\JsonResponse
     {
         $heroes = Heroes::all();
-        $news = News::all();
-        $rooms = Room::all();
-        $pictures = Pictures::all();
-
-        return view('pages.hero.index', compact('heroes', 'news', 'rooms', 'pictures'));
+        return response()->json($heroes);
     }
 
-    /**
-     * Afficher un héros spécifique.
-     *
-     * @param Heroes $hero
-     * @return Factory|View
-     */
-    public function show(Heroes $hero): Factory|View
+    // Update
+
+    public function updateHero(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        return view('pages.hero.show', compact('hero'));
+        $hero = Heroes::find($id);
+        $hero->extracted($request, $hero);
+
+        return response()->json([
+            'message' => 'modifié avec succès',
+            'data' => $hero
+        ], 200); // 200 OK
     }
 
-    /**
-     * Afficher le formulaire de création pour un nouveau héros.
-     *
-     * @return Factory|View
-     */
-    public function create(): Factory|View
+    // Delete
+
+    public function deleteHero($id): \Illuminate\Http\JsonResponse
     {
-        return view('pages.hero.create');
-    }
-
-    /**
-     * Stocker un nouveau héros.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'section_name' => 'required|string|max:255',
-            'section_content' => 'nullable|string',
-            'picture_id' => 'nullable|integer|exists:pictures,id',
-        ]);
-
-        $hero = Heroes::create($request->all());
-
-        return redirect()->route('hero.show', $hero->id)
-            ->with('message', 'Héros créé avec succès.');
-    }
-
-    /**
-     * Afficher le formulaire pour modifier un héros.
-     *
-     * @param Heroes $hero
-     * @return Factory|View
-     */
-    public function edit(Heroes $hero): Factory|View
-    {
-
-
-    }
-
-    /**
-     * Mettre à jour un héros existant.
-     *
-     * @param Request $request
-     * @param Heroes $hero
-     * @return RedirectResponse
-     */
-    public function update(Request $request, Heroes $hero): RedirectResponse
-    {
-        $request->validate([
-            'section_name' => 'required|string|max:255',
-            'section_content' => 'nullable|string',
-            'picture_id' => 'nullable|integer|exists:pictures,id',
-        ]);
-
-        $hero->update($request->all());
-
-        return redirect()->route('hero.show', $hero->id)
-            ->with('message', 'Mis à jour avec succès.');
-    }
-
-    /**
-     * Supprimer un héros.
-     *
-     * @param Heroes $hero
-     * @return RedirectResponse
-     */
-    public function destroy(Heroes $hero): RedirectResponse
-    {
+        $hero = Heroes::find($id);
         $hero->delete();
 
-        return redirect()->route('hero.index')
-            ->with('message', 'Supprimé avec succès.');
+        return response()->json([
+            'message' => 'supprimé avec succès'
+        ], 200); // 200 OK
     }
 }

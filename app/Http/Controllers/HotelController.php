@@ -10,121 +10,70 @@ use Illuminate\Http\RedirectResponse;
 
 class HotelController extends Controller
 {
-    /**
-     * Affiche une liste paginée des hôtels.
-     *
-     * @param Request $request
-     * @return View|Factory
-     */
-    public function index(Request $request): Factory|View
-    {
-        // Récupérer les hôtels avec pagination
-        $hotels = Hotel::paginate(10);
 
-        // Retourner la vue avec les hôtels
-        return view('pages.hotel.index', compact('hotels'));
-    }
+    // Create
 
-    /**
-     * Affiche un hôtel spécifique.
-     *
-     * @param Hotel $hotel
-     * @return View|Factory
-     */
-    public function show(Hotel $hotel): Factory|View
+    public function saveHotel(Request $request): \Illuminate\Http\JsonResponse
     {
-        // Retourner la vue avec l'hôtel spécifique
-        return view('pages.hotel.show', compact('hotel'));
-    }
-
-    /**
-     * Affiche le formulaire pour créer un nouvel hôtel.
-     *
-     * @return View|Factory
-     */
-    public function create(): Factory|View
-    {
-        // Retourner la vue avec une instance vide de l'hôtel
-        return view('pages.hotel.create', ['hotel' => new Hotel]);
-    }
-
-    /**
-     * Enregistre un nouvel hôtel dans la base de données.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        // Valider les données de la requête
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'ZIP_code' => 'required|string|max:10',
-            'city' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:15',
-            'email' => 'required|email|max:255',
+        $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'ZIP_code' => 'required|string',
+            'city' => 'required|string',
+            'country' => 'required|string',
+            'phone_number' => 'required|string',
+            'email' => 'required|string',
         ]);
+        $hotel = new Hotel();
+        if (!$hotel) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
+        $hotel->extracted($request, $hotel);
 
-        // Créer un nouvel hôtel avec les données validées
-        $hotel = Hotel::create($validated);
-
-        // Rediriger vers la page de l'hôtel avec un message de succès
-        return redirect()->route('hotel.show', $hotel->id)->with('message', 'Hôtel créé avec succès.');
+        return response()->json([
+            'message' => 'créé avec succès',
+            'data' => $hotel
+        ], 201); // 201 Created
     }
 
-    /**
-     * Affiche le formulaire pour modifier un hôtel existant.
-     *
-     * @param Hotel $hotel
-     * @return View|Factory
-     */
-    public function edit(Hotel $hotel): Factory|View
+// Read
+
+    public function getAllHotels(): \Illuminate\Http\JsonResponse
     {
-        // Retourner la vue avec l'hôtel à modifier
-        return view('pages.hotel.edit', compact('hotel'));
+        $hotels = Hotel::all();
+        return response()->json($hotels);
     }
 
-    /**
-     * Met à jour un hôtel dans la base de données.
-     *
-     * @param Request $request
-     * @param Hotel $hotel
-     * @return RedirectResponse
-     */
-    public function update(Request $request, Hotel $hotel): RedirectResponse
+// Update
+
+    public function updateHotel(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        // Valider les données de la requête
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'ZIP_code' => 'required|string|max:10',
-            'city' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:15',
-            'email' => 'required|email|max:255',
-        ]);
+        $hotel = Hotel::find($id);
+        if (!$hotel) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
+        $hotel->extracted($request, $hotel);
 
-        // Mettre à jour l'hôtel avec les données validées
-        $hotel->update($validated);
-
-        // Rediriger vers la page de l'hôtel avec un message de succès
-        return redirect()->route('hotels.show', $hotel->id)->with('message', 'Hôtel mis à jour avec succès.');
+        return response()->json([
+            'message' => 'modifié avec succès',
+            'data' => $hotel
+        ], 200); // 200 OK
     }
 
-    /**
-     * Supprime un hôtel de la base de données.
-     *
-     * @param Hotel $hotel
-     * @return RedirectResponse
-     */
-    public function destroy(Hotel $hotel): RedirectResponse
+// Delete
+
+    public function deleteHotel($id): \Illuminate\Http\JsonResponse
     {
-        // Supprimer l'hôtel
+        $hotel = Hotel::find($id);
         $hotel->delete();
 
-        // Rediriger vers la liste des hôtels avec un message de succès
-        return redirect()->route('hotels.index')->with('message', 'Hôtel supprimé avec succès.');
+        return response()->json([
+            'message' => 'supprimé avec succès'
+        ], 200); // 200 OK
     }
 }
+

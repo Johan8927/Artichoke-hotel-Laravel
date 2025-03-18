@@ -25,34 +25,59 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 });
-// Heroes routes
-Route::middleware('auth')->group(function () {
-    Route::get('/hero', function () {
-        return view('pages.hero.index');
-    });
-    Route::get('/hero/{hero}', function (App\Models\Heroes $hero) {
-        return view('pages.hero.show', compact('hero'));
-    });
-    Route::get('/hero/create', function () {
-        return view('pages.hero.create');
-    });
-    Route::get('/hero/{hero}/edit', function (App\Models\Heroes $hero) {
-        return view('pages.hero.edit', compact('hero'));
-    });
-    Route::post('/hero', [App\Http\Controllers\HeroesController::class, 'store']);
-    Route::patch('/hero/{hero}', [App\Http\Controllers\HeroesController::class, 'update']);
-    Route::delete('/hero/{hero}', [App\Http\Controllers\HeroesController::class, 'destroy']);
-});
 
+// Amenities routes
+Route::post("/amenities/save", [App\Http\Controllers\AmenitiesController::class, 'saveAmenities']);
 Route::get("/amenities", [App\Http\Controllers\AmenitiesController::class, 'getAllAmenities']);
+Route::put("/amenities/{id}", [App\Http\Controllers\AmenitiesController::class, 'updateAmenities']);
+Route::delete("/amenities/{id}", [App\Http\Controllers\AmenitiesController::class, 'deleteAmenities']);
+
+// Rooms routes
+Route::post("/rooms", [App\Http\Controllers\RoomsController::class, 'saveRooms']);
+Route::get("/rooms", [App\Http\Controllers\RoomsController::class, 'getAllRooms']);
+Route::put("/rooms/{id}", [App\Http\Controllers\RoomsController::class, 'updateRooms']);
+Route::delete("/rooms/{id}", [App\Http\Controllers\RoomsController::class, 'deleteRooms']);
+
+// RoomTypePicture routes
+Route::post("/roomTypePicture", [App\Http\Controllers\RoomsTypePictureController::class, 'saveRoomTypePicture']);
+Route::get("/roomTypePicture", [App\Http\Controllers\RoomsTypePictureController::class, 'getAllRoomTypePicture']);
+Route::put("/roomTypePicture/{id}", [App\Http\Controllers\RoomsTypePictureController::class, 'updateRoomTypePicture']);
+Route::delete("/roomTypePicture/{id}", [App\Http\Controllers\RoomsTypePictureController::class, 'deleteRoomTypePicture']);
+
+// Pictures routes
+Route::post("/pictures", [App\Http\Controllers\PicturesController::class, 'savePictures']);
+Route::get("/pictures", [App\Http\Controllers\PicturesController::class, 'getAllPictures']);
+Route::put("/pictures/{id}", [App\Http\Controllers\PicturesController::class, 'updatePictures']);
+Route::delete("/pictures/{id}", [App\Http\Controllers\PicturesController::class, 'deletePictures']);
+
+// RoomType routes
+Route::post("/roomType", [App\Http\Controllers\RoomsTypeController::class, 'saveRoomType']);
+Route::get("/roomType", [App\Http\Controllers\RoomsTypeController::class, 'getAllRoomType']);
+Route::put("/roomType/{id}", [App\Http\Controllers\RoomsTypeController::class, 'updateRoomType']);
+Route::delete("/roomType/{id}", [App\Http\Controllers\RoomsTypeController::class, 'deleteRoomType']);
+
+// Heroes routes
+Route::post("/heroes", [App\Http\Controllers\HeroesController::class, 'saveHeroes']);
+Route::get("/heroes", [App\Http\Controllers\HeroesController::class, 'getAllHeroes']);
+Route::put("/heroes/{id}", [App\Http\Controllers\HeroesController::class, 'updateHeroes']);
+Route::delete("/heroes/{id}", [App\Http\Controllers\HeroesController::class, 'deleteHeroes']);
+
+// Hotels routes
+Route::post("/hotels", [App\Http\Controllers\HotelController::class, 'saveHotels']);
+Route::get("/hotels", [App\Http\Controllers\HotelController::class, 'getAllHotels']);
+Route::put("/hotels/{id}", [App\Http\Controllers\HotelController::class, 'updateHotels']);
+Route::delete("/hotels/{id}", [App\Http\Controllers\HotelController::class, 'deleteHotels']);
+
+// News routes
+Route::post("/news", [App\Http\Controllers\NewsController::class, 'saveNews']);
+Route::get("/news", [App\Http\Controllers\NewsController::class, 'getAllNews']);
+Route::put("/news/{id}", [App\Http\Controllers\NewsController::class, 'updateNews']);
+Route::delete("/news/{id}", [App\Http\Controllers\NewsController::class, 'deleteNews']);
 
 
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// Vue.js routes
 
 Route::get('/{any}', function () {
-    return view('app'); // Assurez-vous que app.blade.php charge bien Vue
+    return response()->json();
 })->where('any', '.*'); // Redirige toutes les requêtes vers Vue

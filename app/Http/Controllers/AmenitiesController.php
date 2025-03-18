@@ -10,13 +10,17 @@ class AmenitiesController extends Controller
     // Create
     public function saveAmenity(Request $request): \Illuminate\Http\JsonResponse
     {
+        $request->validate([
+            'name' => 'required|string',
+            'id_picture' => 'required|integer',
+            'content' => 'nullable|string',
+        ]);
+
         $amenity = new Amenities();
-        $amenity->name = $request->name;
-        $amenity->description = $request->description;
-        $amenity->save();
+        $amenity->extracted($request, $amenity);
 
         return response()->json([
-            'message' => 'créé avec succès',
+            'message' => 'Créé avec succès',
             'data' => $amenity
         ], 201); // 201 Created
     }
@@ -34,17 +38,14 @@ class AmenitiesController extends Controller
         $amenity = Amenities::find($id);
         if (!$amenity) {
             return response()->json([
-                'message' => 'non trouvé'
+                'message' => 'Non trouvé'
             ], 404); // 404 Not Found
         }
 
-        $amenity->name = $request->name;
-        $amenity->description = $request->description;
-        $amenity->id_picture = $request->id_picture;
-        $amenity->save();
+        $amenity->extracted($request, $amenity);
 
         return response()->json([
-            'message' => 'mis à jour avec succès',
+            'message' => 'Modifié avec succès',
             'data' => $amenity
         ], 200); // 200 OK
     }
@@ -55,14 +56,14 @@ class AmenitiesController extends Controller
         $amenity = Amenities::find($id);
         if (!$amenity) {
             return response()->json([
-                'message' => 'non trouvé'
+                'message' => 'Non trouvé'
             ], 404); // 404 Not Found
         }
 
         $amenity->delete();
 
         return response()->json([
-            'message' => 'supprimé avec succès'
+            'message' => 'Supprimé avec succès'
         ], 200); // 200 OK
     }
 }

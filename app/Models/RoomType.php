@@ -9,6 +9,7 @@ class RoomType extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'name',
         'description',
@@ -16,17 +17,19 @@ class RoomType extends Model
         'price',
     ];
 
-    // Relation avec la table 'pictures' pour l'image de la chambre
-    public function picture(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    //Method to find a room type by id
+    public static function find($id)
     {
-        return $this->belongsTo(Pictures::class, 'rooms_type_pictures_id');
+        return RoomType::find($id);
     }
-    public function getFillable(): array
+
+// Method to extract the room type
+    public function extracted(\Illuminate\Http\Request $request, RoomType $roomType): void
     {
-        return $this->fillable;
-    }
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
+        $roomType->name = $request->name;
+        $roomType->description = $request->description;
+        $roomType->maximumcapacity = $request->maximumcapacity;
+        $roomType->price = $request->price;
+        $roomType->save();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Http\Request;
 
 class News extends Model
 {
@@ -16,20 +17,9 @@ class News extends Model
         'section_content',
     ];
 
-    /**
-     * @return string[]
-     */
-    public function getFillable(): array
+    // Method for find id for news
+    public static function find($id)
     {
-        return $this->fillable;
+        return self::query()->find($id);
     }
-
-    /**
-     * @param string[] $fillable
-     */
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
-    }
-
 }

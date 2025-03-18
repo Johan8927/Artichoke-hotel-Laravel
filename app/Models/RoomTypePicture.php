@@ -14,24 +14,16 @@ class RoomTypePicture extends Model
         'id_picture',
     ];
 
-    public function picture()
+    public static function find($id)
     {
-        return $this->belongsTo(Pictures::class);
+        return self::query()->find($id);
     }
 
-    public function roomType()
-    {
-        return $this->belongsTo(RoomType::class);
-    }
 
-    public function getFillable(): array
+    public function extracted(\Illuminate\Http\Request $request): void
     {
-        return $this->fillable;
-    }
-
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
+        $this->id_rooms_type = $request->id_rooms_type;
+        $this->id_picture = $request->id_picture;
     }
 
 }

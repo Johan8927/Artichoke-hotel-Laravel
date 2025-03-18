@@ -21,15 +21,13 @@ class Room extends Model
         'rooms_number',
     ];
 
-    public function getFillable(): array
+    // Method for find room by id
+    public static function find($id)
     {
-        return $this->fillable;
+        return self::query()->find($id);
     }
 
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
-    }
+
 
 
 }

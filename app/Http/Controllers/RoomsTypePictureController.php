@@ -2,45 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RoomTypePicture;
 use Illuminate\Http\Request;
 
 class RoomsTypePictureController extends Controller
 {
 
-    public function index()
+    // Create
+    public function saveRoomTypePicture(Request $request): \Illuminate\Http\JsonResponse
     {
-        return view('pages.room_type_pictures.index');
+        $request->validate([
+            'id_rooms_type' => 'required',
+            'id_picture' => 'required',
+        ]);
+        $roomTypePicture = new RoomTypePicture();
+        $roomTypePicture->extracted($request);
+        return response()->json($roomTypePicture);
     }
 
-    public function create()
+    // Read
+    public function getAllRoomTypePicture(): \Illuminate\Http\JsonResponse
     {
-        return view('pages.room_type_pictures.create');
+        return response()->json(RoomTypePicture::all());
     }
 
-    public function store(Request $request)
+    // Update
+
+    public function updateRoomTypePicture(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-
-
-
+        $roomTypePicture = RoomTypePicture::find($id);
+        if (!$roomTypePicture) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
+        $roomTypePicture->extracted($request);
+        $roomTypePicture->save();
+        return response()->json($roomTypePicture);
     }
 
-    public function show($id)
-    {
-        return view('pages.room_type_pictures.show');
-    }
+    // Delete
 
-    public function edit($id)
+    public function deleteRoomTypePicture($id): \Illuminate\Http\JsonResponse
     {
-        return view('pages.room_type_pictures.edit');
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+        $roomTypePicture = RoomTypePicture::find($id);
+        $roomTypePicture->delete();
+        return response()->json([
+            'message' => 'supprimé avec succès'
+        ], 200); // 200 OK
     }
 }

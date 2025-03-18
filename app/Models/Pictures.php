@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Request;
 
 
 class Pictures extends Model
@@ -15,12 +16,9 @@ class Pictures extends Model
         'path',
     ];
 
-    public function getFillable(): array
+    //Method to find a picture by its id
+    public static function find($id)
     {
-        return $this->fillable;
-    }
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
+        return self::query()->find($id);
     }
 }
