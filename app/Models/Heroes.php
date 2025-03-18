@@ -23,11 +23,7 @@ class Heroes extends Model
         'id_picture',
     ];
 
-    // Method for find id by hero
-    public static function find($id)
-    {
-        return self::query()->find($id);
-    }
+
 
     // Method for extract data from request
     public function extracted(\Illuminate\Http\Request $request, Heroes $hero): void

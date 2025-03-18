@@ -15,6 +15,11 @@ class HeroesController extends Controller
 {
 
     // Create
+    private static function query()
+    {
+        return Heroes::query();
+    }
+
     public function saveHero(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -36,6 +41,11 @@ class HeroesController extends Controller
     {
         $heroes = Heroes::all();
         return response()->json($heroes);
+    }
+    // Method for find id by hero
+    public static function find($id)
+    {
+        return self::query()->find($id);
     }
 
     // Update

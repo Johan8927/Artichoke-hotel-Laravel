@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
+
 
 class Hotel extends Model
 {
@@ -21,11 +21,6 @@ class Hotel extends Model
         'email',
     ];
 
-    // Method for find id for hotel
-    public static function find($id)
-    {
-        return self::query()->find($id);
-    }
 
     // Méthode pour extraire les données du Request et les assigner à l'objet Hotel'
     public function extracted(\Illuminate\Http\Request $request, Hotel $hotel): void

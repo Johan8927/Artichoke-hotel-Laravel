@@ -9,6 +9,11 @@ class RoomsTypePictureController extends Controller
 {
 
     // Create
+    private static function query()
+    {
+        return RoomTypePicture::query();
+    }
+
     public function saveRoomTypePicture(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -24,6 +29,11 @@ class RoomsTypePictureController extends Controller
     public function getAllRoomTypePicture(): \Illuminate\Http\JsonResponse
     {
         return response()->json(RoomTypePicture::all());
+    }
+
+    public static function find($id)
+    {
+        return self::query()->find($id);
     }
 
     // Update

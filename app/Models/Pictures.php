@@ -15,10 +15,4 @@ class Pictures extends Model
         'name',
         'path',
     ];
-
-    //Method to find a picture by its id
-    public static function find($id)
-    {
-        return self::query()->find($id);
-    }
 }

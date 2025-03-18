@@ -14,10 +14,6 @@ class RoomTypePicture extends Model
         'id_picture',
     ];
 
-    public static function find($id)
-    {
-        return self::query()->find($id);
-    }
 
 
     public function extracted(\Illuminate\Http\Request $request): void

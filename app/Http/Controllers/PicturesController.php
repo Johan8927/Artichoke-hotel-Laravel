@@ -10,6 +10,11 @@ class PicturesController extends Controller
 
     // Create
 
+    private static function query(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Pictures::query();
+    }
+
     public function savePictures(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -31,6 +36,11 @@ class PicturesController extends Controller
     {
         $pictures = Pictures::all();
         return response()->json($pictures);
+    }
+    //Method to find a picture by its id
+    public static function find($id)
+    {
+        return self::query()->find($id);
     }
 
     // Update

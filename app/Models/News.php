@@ -17,9 +17,4 @@ class News extends Model
         'section_content',
     ];
 
-    // Method for find id for news
-    public static function find($id)
-    {
-        return self::query()->find($id);
-    }
 }

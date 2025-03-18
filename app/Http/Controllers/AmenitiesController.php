@@ -8,6 +8,11 @@ use App\Models\Amenities;
 class AmenitiesController extends Controller
 {
     // Create
+    private static function query(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Amenities::query();
+    }
+
     public function saveAmenity(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -31,6 +36,12 @@ class AmenitiesController extends Controller
         $amenities = Amenities::all();
         return response()->json($amenities, 200); // 200 OK
     }
+    // Method to find id of amenity
+    public static function find($id)
+    {
+        return self::query()->find($id);
+    }
+
 
     // Update
     public function updateAmenity(Request $request, $id): \Illuminate\Http\JsonResponse

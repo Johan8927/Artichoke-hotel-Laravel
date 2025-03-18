@@ -20,14 +20,4 @@ class Room extends Model
         'id_rooms_type',
         'rooms_number',
     ];
-
-    // Method for find room by id
-    public static function find($id)
-    {
-        return self::query()->find($id);
-    }
-
-
-
-
 }

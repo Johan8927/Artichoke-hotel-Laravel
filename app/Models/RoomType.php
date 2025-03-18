@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RoomType extends Model
 {
-    use HasFactory;
 
 
     protected $fillable = [
@@ -17,13 +16,9 @@ class RoomType extends Model
         'price',
     ];
 
-    //Method to find a room type by id
-    public static function find($id)
-    {
-        return RoomType::find($id);
-    }
 
 // Method to extract the room type
+
     public function extracted(\Illuminate\Http\Request $request, RoomType $roomType): void
     {
         $roomType->name = $request->name;

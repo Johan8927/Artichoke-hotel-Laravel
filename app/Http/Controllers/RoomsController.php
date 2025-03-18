@@ -20,6 +20,11 @@ class RoomsController extends Controller
 
     // Create
 
+    private static function query(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Room::query();
+    }
+
     public function saveRoom(Request $request): \Illuminate\Http\JsonResponse
     {
 
@@ -44,6 +49,12 @@ class RoomsController extends Controller
         $room = Room::all();
         return response()->json($room);
     }
+    // Method for find room by id
+    public static function find($id)
+    {
+        return self::query()->find($id);
+    }
+
 
 // Update
 

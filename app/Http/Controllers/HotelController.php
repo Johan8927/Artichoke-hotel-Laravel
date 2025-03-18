@@ -13,6 +13,11 @@ class HotelController extends Controller
 
     // Create
 
+    private static function query(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Hotel::query();
+    }
+
     public function saveHotel(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -24,12 +29,8 @@ class HotelController extends Controller
             'phone_number' => 'required|string',
             'email' => 'required|string',
         ]);
+
         $hotel = new Hotel();
-        if (!$hotel) {
-            return response()->json([
-                'message' => 'non trouvé'
-            ], 404); // 404 Not Found
-        }
         $hotel->extracted($request, $hotel);
 
         return response()->json([
@@ -45,6 +46,12 @@ class HotelController extends Controller
         $hotels = Hotel::all();
         return response()->json($hotels);
     }
+    // Method for find id for hotel
+    public static function find($id)
+    {
+        return self::query()->find($id);
+    }
+
 
 // Update
 

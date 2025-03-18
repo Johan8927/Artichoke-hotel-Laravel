@@ -13,6 +13,11 @@ class NewsController extends Controller
 
     // Create
 
+    private static function query(): \Illuminate\Database\Eloquent\Builder
+    {
+        return News::query();
+    }
+
     public function saveNews(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
@@ -35,6 +40,12 @@ class NewsController extends Controller
     {
         $news = News::all();
         return response()->json($news);
+    }
+
+    // Method for find id for news
+    public static function find($id)
+    {
+        return self::query()->find($id);
     }
 
 // Update

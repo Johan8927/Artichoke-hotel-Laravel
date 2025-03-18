@@ -37,6 +37,11 @@ class RoomsTypeController extends Controller
         $roomType = RoomType::all();
         return response()->json($roomType);
     }
+    public static function find($id)
+    {
+        return RoomType::find($id);
+    }
+
 
     // Update
 
@@ -54,4 +59,6 @@ class RoomsTypeController extends Controller
             'data' => $roomType
         ], 200); // 200 OK
     }
+
+
 }
