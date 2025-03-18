@@ -10,10 +10,9 @@ class HeroesSeeder extends Seeder
     public function run(): void
     {
         DB::table('heroes')->insert([
-            'section_name' => 'Bienvenue sur notre site',
-            'section_content' => 'Découvrez nos offres de locations de vacances',
-            'picture_id' => 1,
+            'section_name' => 'Hero',
+            'section_content' => 'https://www.travelmanagers.com.au/wp-content/uploads/2023/06/AdobeStock_286563877-1.jpeg',
+            'id_picture' => 11,
         ]);
     }
-
 }

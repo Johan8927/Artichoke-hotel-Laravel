@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('section_name');
             $table->text('section_content');
-            $table->foreignId('picture_id')->constrained('pictures')->onDelete('cascade');
+            $table->foreignId('id_picture')->constrained('pictures')->onDelete('cascade');
             $table->timestamps();
         });
     }

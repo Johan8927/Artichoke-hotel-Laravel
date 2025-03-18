@@ -16,15 +16,4 @@ class Amenities extends Model
         'id_picture',
         'content',
     ];
-
-
-    /**
-     * Relation "appartient à" avec le modèle Pictures.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function picture(): BelongsTo
-    {
-        return $this->belongsTo(Pictures::class, 'id_picture');
-    }
 }

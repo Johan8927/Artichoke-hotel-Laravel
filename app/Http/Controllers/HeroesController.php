@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Models\Heroes;
 use App\Models\News;
-use App\Models\Rooms;
+use App\Models\Room;
 use App\Models\Pictures;
 
 class HeroesController extends Controller
@@ -22,7 +22,7 @@ class HeroesController extends Controller
     {
         $heroes = Heroes::all();
         $news = News::all();
-        $rooms = Rooms::all();
+        $rooms = Room::all();
         $pictures = Pictures::all();
 
         return view('pages.hero.index', compact('heroes', 'news', 'rooms', 'pictures'));
@@ -99,7 +99,7 @@ class HeroesController extends Controller
         $hero->update($request->all());
 
         return redirect()->route('hero.show', $hero->id)
-            ->with('message', 'Héros mis à jour avec succès.');
+            ->with('message', 'Mis à jour avec succès.');
     }
 
     /**
@@ -113,6 +113,6 @@ class HeroesController extends Controller
         $hero->delete();
 
         return redirect()->route('hero.index')
-            ->with('message', 'Héros supprimé avec succès.');
+            ->with('message', 'Supprimé avec succès.');
     }
 }

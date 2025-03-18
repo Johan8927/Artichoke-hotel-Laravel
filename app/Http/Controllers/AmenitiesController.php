@@ -7,58 +7,59 @@ use App\Models\Amenities;
 
 class AmenitiesController extends Controller
 {
-    // Création
-    public function saveAmenities(Request $request): \Illuminate\Http\JsonResponse
+    // Create
+    public function saveAmenity(Request $request): \Illuminate\Http\JsonResponse
     {
-        $amenities = new Amenities();
-        $amenities->name = $request->name;
-        $amenities->description = $request->description;
-        $amenities->save();
+        $amenity = new Amenities();
+        $amenity->name = $request->name;
+        $amenity->description = $request->description;
+        $amenity->save();
 
         return response()->json([
-            'message' => 'Équipement créé avec succès',
-            'data' => $amenities
+            'message' => 'créé avec succès',
+            'data' => $amenity
         ], 201); // 201 Created
     }
 
-    // Lecture
+    // Read
     public function getAllAmenities(): \Illuminate\Http\JsonResponse
     {
         $amenities = Amenities::all();
         return response()->json($amenities, 200); // 200 OK
     }
 
-    // Mise à jour
-    public function updateAmenities(Request $request, $id): \Illuminate\Http\JsonResponse
+    // Update
+    public function updateAmenity(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $amenities = Amenities::find($id);
-        if (!$amenities) {
+        $amenity = Amenities::find($id);
+        if (!$amenity) {
             return response()->json([
                 'message' => 'non trouvé'
             ], 404); // 404 Not Found
         }
 
-        $amenities->name = $request->name;
-        $amenities->description = $request->description;
-        $amenities->save();
+        $amenity->name = $request->name;
+        $amenity->description = $request->description;
+        $amenity->id_picture = $request->id_picture;
+        $amenity->save();
 
         return response()->json([
             'message' => 'mis à jour avec succès',
-            'data' => $amenities
+            'data' => $amenity
         ], 200); // 200 OK
     }
 
-    // Suppression
-    public function destroyAmenities($id): \Illuminate\Http\JsonResponse
+    // Delete
+    public function destroyAmenity($id): \Illuminate\Http\JsonResponse
     {
-        $amenities = Amenities::find($id);
-        if (!$amenities) {
+        $amenity = Amenities::find($id);
+        if (!$amenity) {
             return response()->json([
                 'message' => 'non trouvé'
             ], 404); // 404 Not Found
         }
 
-        $amenities->delete();
+        $amenity->delete();
 
         return response()->json([
             'message' => 'supprimé avec succès'

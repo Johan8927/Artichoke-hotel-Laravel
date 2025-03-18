@@ -15,6 +15,23 @@ class NewsSeeder extends Seeder
             'section_content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.',
         ]);
 
+        DB::table('news')->insert([
+            'section_name' => 'News',
+            'section_type' => 'News',
+            'section_content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.',
+        ]);
+
+        DB::table('news')->insert([
+            'section_name' => 'News',
+            'section_type' => 'News',
+            'section_content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.',
+        ]);
+
+        DB::table('news')->insert([
+            'section_name' => 'News',
+            'section_type' => 'News',
+            'section_content' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget sapien.',
+        ]);
     }
 }
 

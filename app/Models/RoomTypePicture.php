@@ -5,21 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Modèle pour représenter les chambres.
- */
-class Rooms extends Model
+class RoomTypePicture extends Model
 {
     use HasFactory;
 
-    /**
-     * Attributs pouvant être remplis via une requête (mass assignable).
-     */
     protected $fillable = [
-        'id_hotel',
         'id_rooms_type',
-        'rooms_number',
+        'id_picture',
     ];
+
+    public function picture()
+    {
+        return $this->belongsTo(Pictures::class);
+    }
+
+    public function roomType()
+    {
+        return $this->belongsTo(RoomType::class);
+    }
 
     public function getFillable(): array
     {
@@ -30,6 +33,5 @@ class Rooms extends Model
     {
         $this->fillable = $fillable;
     }
-
 
 }
