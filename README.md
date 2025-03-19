@@ -64,3 +64,88 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Description du projet 
+
+Hotel Artichaud est un site d'e-commerce de réservation de chambres d'hotel. Ce projet est une application backend développée avec **Laravel**, servant de base pour la gestion des réservations et des utilisateurs. Il fournit une API robuste permettant de **gérer les réservations**, **authentifier les utilisateurs**, et **stocker les informations de profil**. La base de données est optimisée avec **MySQL**, et la documentation de l’API est générée avec **Springdoc OpenAPI**. 🚀
+
+## Dépendances
+
+Pour gérer les dépendances, Laravel utilise composer
+
+### ⚙️ **Dépendances requises**
+
+PHP 8+, Composer, MySQL et Laravel installé.
+
+#### 📦 **Dépendances principales**
+
+Laravel utilise composer 
+
+Ces dépendances sont nécessaires pour faire fonctionner le backend :
+
+composer require laravel/sanctum             # Authentification API
+composer require fruitcake/laravel-cors      # Gestion du CORS
+composer require doctrine/dbal               # Gestion des migrations
+composer require barryvdh/laravel-debugbar   # Debugging
+composer require laravel/tinker              # Interactions avec la base de données
+composer require nesbot/carbon               # Manipulation des dates
+composer require spatie/laravel-permission   # Gestion des rôles et permissions
+composer require league/flysystem-aws-s3-v3  # Stockage des fichiers sur AWS S3 (optionnel)
+
+🛠 **Dépendances pour le développement**
+
+composer require --dev barryvdh/laravel-ide-helper   # Aide pour IDE (facultatif)
+composer require --dev barryvdh/laravel-debugbar     # Barre de debug Laravel
+composer require --dev nunomaduro/collision          # Meilleurs messages d'erreur
+
+
+### 🏗 **Installation et configuration du projet**
+
+1️⃣ **Cloner le projet**
+
+git clone https://github.com/Johan8927/laravel-rez-game.git
+cd laravel-rez-game
+
+2️⃣ **Installer les dépendances**
+
+composer install
+
+3️⃣ **Créer et configurer le fichier `.env`**
+
+cp .env.example .env
+
+php artisan key:generate
+
+Modifié ensuite `.env` pour configurer la base de données :
+
+DB_DATABASE=mydb
+DB_USERNAME=Artichoke
+DB_PASSWORD=*******
+
+4️⃣ **Lancer les migrations et seeders**
+
+php artisan migrate --seed
+
+5️⃣ **Démarrer le serveur**
+
+php artisan serve
+
+### 🔥 **Commandes utiles**
+
+🚀 **Gestion du cache**
+
+php artisan cache:clear        # Supprimer le cache
+php artisan config:clear       # Supprimer le cache de configuration
+php artisan route:clear        # Supprimer le cache des routes
+php artisan view:clear         # Supprimer le cache des vues Blade bien que le projet n'utilise pas Blade mais un front-end avec Vue.js
+
+📌 **Gestion des migrations**
+
+php artisan migrate            # Exécuter toutes les migrations
+php artisan migrate:rollback   # Annuler la dernière migration
+php artisan migrate:refresh    # Réinitialiser et exécuter toutes les migrations
+
+🔧 **Gestion des utilisateurs et rôles**
+
+php artisan tinker             # Mode interactif pour tester des commandes
+php artisan db:seed            # Insérer des donnée
