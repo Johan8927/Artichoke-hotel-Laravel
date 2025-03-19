@@ -12,25 +12,25 @@ class Heroes extends Model
 {
     use HasFactory;
 
-    // Utilise le trait pour les usines de modèles.
+
 
     /**
      * Attributs pouvant être remplis via une requête (mass assignable).
      */
     protected $fillable = [
-        'section_name',        // Titre du héros.
-        'section_content',  // Description du héros.
-        'picture_id',        // Chemin ou URL de l'image associée au héros.
+        'section_name',
+        'section_content',
+        'id_picture',
     ];
 
-    public function getFillable(): array
-    {
-        return $this->fillable;
-    }
 
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
-    }
 
+    // Method for extract data from request
+    public function extracted(\Illuminate\Http\Request $request, Heroes $hero): void
+    {
+        $hero->section_name = $request->section_name;
+        $hero->section_content = $request->section_content;
+        $hero->id_picture = $request->id_picture;
+        $hero->save();
+    }
 }

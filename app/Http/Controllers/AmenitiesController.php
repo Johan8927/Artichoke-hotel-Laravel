@@ -2,105 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Amenities;
-use Illuminate\View\View;
-
-
-/**
- * Description of AmenitiesController
- *
- * @author Tuhin Bepari <digitaldreams40@gmail.com>
- */
 
 class AmenitiesController extends Controller
 {
-       /**
-     * Display a listing of Amenities
-     *
-     * @return \Illuminate\Http\JsonResponse
-        */
-    public function getAllAmenities(){
+    // Create
+    private static function query(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Amenities::query();
+    }
+
+    public function saveAmenity(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'id_picture' => 'required|integer',
+            'content' => 'nullable|string',
+        ]);
+
+        $amenity = new Amenities();
+        $amenity->extracted($request, $amenity);
+
+        return response()->json([
+            'message' => 'Créé avec succès',
+            'data' => $amenity
+        ], 201); // 201 Created
+    }
+
+    // Read
+    public function getAllAmenities(): \Illuminate\Http\JsonResponse
+    {
         $amenities = Amenities::all();
-        return response()->json($amenities);
+        return response()->json($amenities, 200); // 200 OK
     }
-
-
-   /**
-     * Display the specified Amenities.
-     *
-     * @return View|Factory
-     */
-    public function show(Amenities $amenities)
+    // Method to find id of amenity
+    public static function find($id)
     {
-
-        return view('pages.amenities.show', [
-		'amenities' => $amenities,
-]);
+        return self::query()->find($id);
     }
 
-   /**
-     * Show the form for creating a new Amenities.
-     *
-     * @return View|Factory
-     */
-    public function create()
+
+    // Update
+    public function updateAmenity(Request $request, $id): \Illuminate\Http\JsonResponse
     {
+        $amenity = Amenities::find($id);
+        if (!$amenity) {
+            return response()->json([
+                'message' => 'Non trouvé'
+            ], 404); // 404 Not Found
+        }
 
-        return view('pages.amenities.create', [
-		'amenities' => new Amenities,
-]);
+        $amenity->extracted($request, $amenity);
+
+        return response()->json([
+            'message' => 'Modifié avec succès',
+            'data' => $amenity
+        ], 200); // 200 OK
     }
 
-    /**
-     * Store a newly created Amenities in storage.
-     *
-     * @return RedirectResponse
-     */
-    public function store(Request $request)
+    // Delete
+    public function destroyAmenity($id): \Illuminate\Http\JsonResponse
     {
-          $amenities = new Amenities;
-		$amenities->fill($request->all())->save();
+        $amenity = Amenities::find($id);
+        if (!$amenity) {
+            return response()->json([
+                'message' => 'Non trouvé'
+            ], 404); // 404 Not Found
+        }
 
-         return redirect()->route('amenities.show',$amenities->id)->with('message','Amenities successfully store');
+        $amenity->delete();
+
+        return response()->json([
+            'message' => 'Supprimé avec succès'
+        ], 200); // 200 OK
     }
-
-   /**
-     * Show the form for editing the specified Amenities.
-     *
-     * @return View|Factory
-     */
-    public function edit(Amenities $amenities)
-    {
-
-        return view('pages.amenities.edit', [
-		'amenities' => $amenities,
-]);
-    }
-
-    /**
-     * Update the specified Amenities in storage.
-     *
-     * @return RedirectResponse
-     */
-    public function update(Request $request,Amenities $amenities)
-    {
-          $amenities->fill($request->all())->save();
-
-         return redirect()->route('amenities.show',$amenities->id)->with('message','Amenities successfully update');
-    }
-
-    /**
-     * Remove the specified Amenities from storage.
-     *
-     * @return RedirectResponse
-     */
-    public function destroy(Amenities $amenities)
-    {
-          $amenities->delete();
-         return redirect()->route('amenities.index',$amenities->id)->with('message','Amenities successfully destroy');
-    }
-
 }

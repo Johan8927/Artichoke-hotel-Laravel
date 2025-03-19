@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Modèle pour représenter les chambres.
  */
-class Rooms extends Model
+class Room extends Model
 {
     use HasFactory;
 
@@ -20,16 +20,4 @@ class Rooms extends Model
         'id_rooms_type',
         'rooms_number',
     ];
-
-    public function getFillable(): array
-    {
-        return $this->fillable;
-    }
-
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
-    }
-
-
 }

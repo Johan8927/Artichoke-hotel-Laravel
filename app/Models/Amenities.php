@@ -10,19 +10,21 @@ class Amenities extends Model
 {
     use HasFactory;
 
+
+
     protected $fillable = [
         'name',
         'id_picture',
         'content',
     ];
 
-    /**
-     * Relation "appartient à" avec le modèle Pictures.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function picture(): BelongsTo
+
+    // Method for extract data from request
+    public function extracted(\Illuminate\Http\Request $request, Amenities $amenity): void
     {
-        return $this->belongsTo(Pictures::class, 'id_picture');
+        $amenity->name = $request->name;
+        $amenity->id_picture = $request->id_picture;
+        $amenity->content = $request->content;
+        $amenity->save();
     }
 }

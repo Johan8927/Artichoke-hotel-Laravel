@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Models\Rooms;
+use App\Models\Room;
 use Illuminate\View\View;
 use LaraCrud\Crud\Controller;
 
@@ -15,95 +15,90 @@ use LaraCrud\Crud\Controller;
  *
  * @author Tuhin Bepari <digitaldreams40@gmail.com>
  */
-
 class RoomsController extends Controller
 {
-       /**
-     * Display a listing of Rooms
-     *
-     * @return View|Factory
-     */
-    public function index(Request $request): Factory|View
+
+    // Create
+
+    private static function query(): \Illuminate\Database\Eloquent\Builder
     {
-          $builder = Rooms::query();
-        return view('pages.rooms.index', [
-		'rooms' => $builder->paginate(10),
-]);
+        return Room::query();
     }
 
-   /**
-     * Display the specified Rooms.
-     *
-     * @return View|Factory
-     */
-    public function show(Rooms $room): Factory|View
+    public function saveRoom(Request $request): \Illuminate\Http\JsonResponse
     {
 
-        return view('pages.rooms.show', [
-		'room' => $room,
-]);
+        $request->validate([
+            'id_hotel' => 'required',
+            'id_rooms_type' => 'required',
+            'rooms_number' => 'required',
+        ]);
+        $room = new Room();
+        $this->extracted($request, $room);
+
+        return response()->json([
+            'message' => 'créé avec succès',
+            'data' => $room
+        ], 201); // 201 Created
     }
 
-   /**
-     * Show the form for creating a new Rooms.
-     *
-     * @return View|Factory
-     */
-    public function create(): Factory|View
+// Read
+
+    public function getAllRooms(): \Illuminate\Http\JsonResponse
     {
-
-        return view('pages.rooms.create', [
-		'room' => new Rooms,
-]);
+        $room = Room::all();
+        return response()->json($room);
     }
-
-    /**
-     * Store a newly created Rooms in storage.
-     *
-     * @return RedirectResponse
-     */
-    public function store(Request $request): RedirectResponse
+    // Method for find room by id
+    public static function find($id)
     {
-          $room = new Rooms;
-		$room->fill($request->all())->save();
-
-         return redirect()->route('rooms.show',$room->id)->with('message','Rooms successfully store');
+        return self::query()->find($id);
     }
 
-   /**
-     * Show the form for editing the specified Rooms.
-     *
-     * @return View|Factory
-     */
-    public function edit(Rooms $room): Factory|View
+
+// Update
+
+    public function updateRoom(Request $request, $id): \Illuminate\Http\JsonResponse
     {
+        $room = Room::find($id);
+        if (!$room) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
+        $this->extracted($request, $room);
 
-        return view('pages.rooms.edit', [
-		'room' => $room,
-]);
+        // Method for extracting data from request and saving to model
+
+
+        return response()->json([
+            'message' => 'modifié avec succès',
+            'data' => $room
+        ], 200); // 200 OK
     }
 
-    /**
-     * Update the specified Rooms in storage.
-     *
-     * @return RedirectResponse
-     */
-    public function update(Request $request, Rooms $room): RedirectResponse
+    // Delete
+
+    public function deleteRoom($id): \Illuminate\Http\JsonResponse
     {
-          $room->fill($request->all())->save();
-
-         return redirect()->route('rooms.show',$room->id)->with('message','Rooms successfully update');
+        $room = Room::find($id);
+        if (!$room) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
+        $room->delete();
+        return response()->json([
+            'message' => 'supprimé avec succès'
+        ], 200); // 200 OK
     }
 
-    /**
-     * Remove the specified Rooms from storage.
-     *
-     * @return RedirectResponse
-     */
-    public function destroy(Rooms $room): RedirectResponse
+    // Method for extracting data from request and saving to model
+    private function extracted(Request $request, $room): void
     {
-          $room->delete();
-         return redirect()->route('rooms.index',$room->id)->with('message','Rooms successfully destroy');
+        $room->id_hotel = $request->id_hotel;
+        $room->id_rooms_type = $request->id_rooms_type;
+        $room->rooms_number = $request->rooms_number;
     }
-
 }
+

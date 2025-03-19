@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Http\Request;
 
 class News extends Model
 {
@@ -15,21 +16,5 @@ class News extends Model
         'section_type',
         'section_content',
     ];
-
-    /**
-     * @return string[]
-     */
-    public function getFillable(): array
-    {
-        return $this->fillable;
-    }
-
-    /**
-     * @param string[] $fillable
-     */
-    public function setFillable(array $fillable): void
-    {
-        $this->fillable = $fillable;
-    }
 
 }

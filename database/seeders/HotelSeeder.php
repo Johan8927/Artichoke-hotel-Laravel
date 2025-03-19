@@ -11,7 +11,7 @@ class HotelSeeder extends Seeder
     public function run(): void
     {
         DB::table('hotel')->insert([
-            'name' => 'Hotel de la plage',
+            'name' => 'Hotel Artichaud',
             'address' => '12 rue de la plage',
             'city' => 'Biarritz',
             'zip_code' => '64200',

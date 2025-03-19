@@ -2,45 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RoomTypePicture;
 use Illuminate\Http\Request;
 
 class RoomsTypePictureController extends Controller
 {
 
-    public function index()
+    // Create
+    private static function query()
     {
-        return view('pages.room_type_pictures.index');
+        return RoomTypePicture::query();
     }
 
-    public function create()
+    public function saveRoomTypePicture(Request $request): \Illuminate\Http\JsonResponse
     {
-        return view('pages.room_type_pictures.create');
+        $request->validate([
+            'id_rooms_type' => 'required',
+            'id_picture' => 'required',
+        ]);
+        $roomTypePicture = new RoomTypePicture();
+        $roomTypePicture->extracted($request);
+        return response()->json($roomTypePicture);
     }
 
-    public function store(Request $request)
+    // Read
+    public function getAllRoomTypePicture(): \Illuminate\Http\JsonResponse
     {
-
-
-
+        return response()->json(RoomTypePicture::all());
     }
 
-    public function show($id)
+    public static function find($id)
     {
-        return view('pages.room_type_pictures.show');
+        return self::query()->find($id);
     }
 
-    public function edit($id)
+    // Update
+
+    public function updateRoomTypePicture(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        return view('pages.room_type_pictures.edit');
+        $roomTypePicture = RoomTypePicture::find($id);
+        if (!$roomTypePicture) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
+        $roomTypePicture->extracted($request);
+        $roomTypePicture->save();
+        return response()->json($roomTypePicture);
     }
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
+    // Delete
 
-    public function destroy($id)
+    public function deleteRoomTypePicture($id): \Illuminate\Http\JsonResponse
     {
-        //
+        $roomTypePicture = RoomTypePicture::find($id);
+        $roomTypePicture->delete();
+        return response()->json([
+            'message' => 'supprimé avec succès'
+        ], 200); // 200 OK
     }
 }

@@ -10,99 +10,80 @@ use App\Models\News;
 
 class NewsController extends Controller
 {
-    /**
-     * Afficher la liste des actualités.
-     *
-     * @return Factory|View
-     */
-    public function index(): Factory|View
+
+    // Create
+
+    private static function query(): \Illuminate\Database\Eloquent\Builder
+    {
+        return News::query();
+    }
+
+    public function saveNews(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'section_name' => 'required|string',
+            'section_type' => 'required|string',
+            'section_content' => 'required|string',
+        ]);
+        $news = new News();
+        $this->extracted($request, $news);
+
+        return response()->json([
+            'message' => 'créé avec succès',
+            'data' => $news
+        ], 201); // 201 Created
+    }
+
+// Read
+
+    public function getAllNews(): \Illuminate\Http\JsonResponse
     {
         $news = News::all();
-        return view('pages.news.index', compact('news'));
+        return response()->json($news);
     }
 
-    /**
-     * Afficher une actualité spécifique.
-     *
-     * @param News $news
-     * @return Factory|View
-     */
-    public function show(News $news): Factory|View
+    // Method for find id for news
+    public static function find($id)
     {
-        return view('pages.news.show', compact('news'));
+        return self::query()->find($id);
     }
 
-    /**
-     * Afficher le formulaire de création pour une nouvelle actualité.
-     *
-     * @return Factory|View
-     */
-    public function create(): Factory|View
+// Update
+
+    public function updateNews(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        return view('pages.news.create');
+        $news = News::find($id);
+        if (!$news) {
+            return response()->json([
+                'message' => 'non trouvé'
+            ], 404); // 404 Not Found
+        }
+        $this->extracted($request, $news);
+
+
+        return response()->json([
+            'message' => 'modifié avec succès',
+            'data' => $news
+        ], 200); // 200 OK
     }
 
-    /**
-     * Stocker une nouvelle actualité.
-     *
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request): RedirectResponse
+// Delete
+
+    public function deleteNews($id): \Illuminate\Http\JsonResponse
     {
-        $request->validate([
-            'section_name' => 'required|string|max:255',
-            'section_content' => 'nullable|string',
-        ]);
-
-        $news = News::create($request->all());
-
-        return redirect()->route('news.show', $news->id)
-            ->with('message', 'Actualité créée avec succès.');
-    }
-
-    /**
-     * Afficher le formulaire pour modifier une actualité.
-     *
-     * @param News $news
-     * @return Factory|View
-     */
-    public function edit(News $news): Factory|View
-    {
-        return view('pages.news.edit', compact('news'));
-    }
-
-    /**
-     * Mettre à jour une actualité existante.
-     *
-     * @param Request $request
-     * @param News $news
-     * @return RedirectResponse
-     */
-    public function update(Request $request, News $news): RedirectResponse
-    {
-        $request->validate([
-            'section_name' => 'required|string|max:255',
-            'section_content' => 'nullable|string',
-        ]);
-
-        $news->update($request->all());
-
-        return redirect()->route('news.show', $news->id)
-            ->with('message', 'Actualité mise à jour avec succès.');
-    }
-
-    /**
-     * Supprimer une actualité.
-     *
-     * @param News $news
-     * @return RedirectResponse
-     */
-    public function destroy(News $news): RedirectResponse
-    {
+        $news = News::find($id);
         $news->delete();
 
-        return redirect()->route('news.index')
-            ->with('message', 'Actualité supprimée avec succès.');
+        return response()->json([
+            'message' => 'supprimé avec succès'
+        ], 200); // 200 OK
+    }
+
+    private function extracted(Request $request, $news): void
+    {
+        $news->section_name = $request->section_name;
+        $news->section_type = $request->section_type;
+        $news->section_content = $request->section_content;
+        $news->save();
     }
 }
