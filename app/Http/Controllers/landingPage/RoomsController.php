@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Models\Room;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 use LaraCrud\Crud\Controller;
 
 

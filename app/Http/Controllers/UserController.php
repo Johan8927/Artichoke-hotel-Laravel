@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\landingPage\Controller;
+use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 

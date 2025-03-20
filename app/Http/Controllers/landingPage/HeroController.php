@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Hero;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use App\Models\Heroes;
-use App\Models\News;
-use App\Models\Room;
-use App\Models\Pictures;
 
-class HeroesController extends Controller
+class HeroController extends Controller
 {
 
     // Create
     private static function query()
     {
-        return Heroes::query();
+        return Hero::query();
     }
 
     public function saveHero(Request $request): \Illuminate\Http\JsonResponse
@@ -27,7 +21,7 @@ class HeroesController extends Controller
             'section_content' => 'required|string',
             'id_picture' => 'required|integer',
         ]);
-        $hero = new Heroes();
+        $hero = new Hero();
         $hero->extracted($request, $hero);
         return response()->json([
             'message' => 'créé avec succès',
@@ -37,10 +31,10 @@ class HeroesController extends Controller
 
     // Read
 
-    public function getAllHeroes(): \Illuminate\Http\JsonResponse
+    public function getHero(): \Illuminate\Http\JsonResponse
     {
-        $heroes = Heroes::all();
-        return response()->json($heroes);
+        $hero = Hero::all();
+        return response()->json($hero);
     }
     // Method for find id by hero
     public static function find($id)
@@ -52,7 +46,7 @@ class HeroesController extends Controller
 
     public function updateHero(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $hero = Heroes::find($id);
+        $hero = Hero::find($id);
         $hero->extracted($request, $hero);
 
         return response()->json([
@@ -65,7 +59,7 @@ class HeroesController extends Controller
 
     public function deleteHero($id): \Illuminate\Http\JsonResponse
     {
-        $hero = Heroes::find($id);
+        $hero = Hero::find($id);
         $hero->delete();
 
         return response()->json([

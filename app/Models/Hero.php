@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Modèle pour représenter les héros de la page d'accueil.
  */
-class Heroes extends Model
+class Hero extends Model
 {
-    use HasFactory;
 
 
 
@@ -26,7 +25,7 @@ class Heroes extends Model
 
 
     // Method for extract data from request
-    public function extracted(\Illuminate\Http\Request $request, Heroes $hero): void
+    public function extracted(\Illuminate\Http\Request $request, Hero $hero): void
     {
         $hero->section_name = $request->section_name;
         $hero->section_content = $request->section_content;

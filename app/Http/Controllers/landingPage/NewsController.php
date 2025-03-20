@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\View\View;
 use App\Models\News;
+use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {

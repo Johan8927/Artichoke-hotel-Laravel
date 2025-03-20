@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
 use App\Models\RoomTypePicture;
 use Illuminate\Http\Request;
 
-class RoomsTypePictureController extends Controller
+class RoomTypePicturesController extends Controller
 {
 
     // Create

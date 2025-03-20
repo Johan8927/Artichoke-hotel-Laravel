@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use App\Models\RoomType;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
 
-class RoomsTypeController extends Controller
+class RoomTypesController extends Controller
 {
     // Create
 

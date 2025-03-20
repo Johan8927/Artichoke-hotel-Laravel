@@ -1,12 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
 use App\Models\Hotel;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\RedirectResponse;
 
 class HotelController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
 use App\Models\Pictures;
 use Illuminate\Http\Request;

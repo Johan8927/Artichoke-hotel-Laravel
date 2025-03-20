@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\landingPage;
 
+use App\Models\Amenity;
 use Illuminate\Http\Request;
-use App\Models\Amenities;
 
 class AmenitiesController extends Controller
 {
     // Create
     private static function query(): \Illuminate\Database\Eloquent\Builder
     {
-        return Amenities::query();
+        return Amenity::query();
     }
 
     public function saveAmenity(Request $request): \Illuminate\Http\JsonResponse
@@ -21,7 +21,7 @@ class AmenitiesController extends Controller
             'content' => 'nullable|string',
         ]);
 
-        $amenity = new Amenities();
+        $amenity = new Amenity();
         $amenity->extracted($request, $amenity);
 
         return response()->json([
@@ -33,7 +33,7 @@ class AmenitiesController extends Controller
     // Read
     public function getAllAmenities(): \Illuminate\Http\JsonResponse
     {
-        $amenities = Amenities::all();
+        $amenities = Amenity::all();
         return response()->json($amenities, 200); // 200 OK
     }
     // Method to find id of amenity
@@ -46,7 +46,7 @@ class AmenitiesController extends Controller
     // Update
     public function updateAmenity(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $amenity = Amenities::find($id);
+        $amenity = Amenity::find($id);
         if (!$amenity) {
             return response()->json([
                 'message' => 'Non trouvé'
@@ -64,7 +64,7 @@ class AmenitiesController extends Controller
     // Delete
     public function destroyAmenity($id): \Illuminate\Http\JsonResponse
     {
-        $amenity = Amenities::find($id);
+        $amenity = Amenity::find($id);
         if (!$amenity) {
             return response()->json([
                 'message' => 'Non trouvé'
