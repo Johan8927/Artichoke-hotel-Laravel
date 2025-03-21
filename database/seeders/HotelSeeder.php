@@ -10,11 +10,11 @@ class HotelSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('hotel')->insert([
+        DB::table('users')->insert([
             'name' => 'Hotel Artichaud',
             'address' => '12 rue de la plage',
-            'city' => 'Biarritz',
             'zip_code' => '64200',
+            'city' => 'Biarritz',
             'country' => 'France',
             'phone_number' => '0559595959',
             'email' => 'Artichoke@gmail.com',

@@ -15,18 +15,18 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('civility')->nullable();
-            $table->string('firstName')->nullable();
-            $table->string('lastName')->nullable();
+            $table->string('firstName');
+            $table->string('lastName');
             $table->string('password');
-            $table->string('address')->nullable();
-            $table->string('ZIP_code')->nullable();
-            $table->string('city')->nullable();
-            $table->string('country')->nullable();
+            $table->string('address');
+            $table->string('ZIP_code');
+            $table->string('city');
+            $table->string('country');
             $table->string('phone_number')->nullable();
             $table->string('email')->unique();
-            $table->boolean('admin_status')->nullable();
-            $table->boolean('client_status')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('admin_status');
+            $table->string('client_status')->nullable();
+            $table->timestamp('email_verified_at');
             $table->rememberToken();
             $table->timestamps();
         });
