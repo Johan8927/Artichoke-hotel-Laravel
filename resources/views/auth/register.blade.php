@@ -1,4 +1,4 @@
-<x-guest-layout>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
     <div class="mt-16">
@@ -150,4 +150,4 @@
             </form>
         </div>
     </div>
-</x-guest-layout>
+

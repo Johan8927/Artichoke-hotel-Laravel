@@ -17,12 +17,28 @@
         @csrf
         @method('patch')
 
+        <!-- Civility -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="civility" :value="__('Civility')" />
+            <x-text-input id="civility" name="civility" type="text" class="mt-1 block w-full" :value="old('civility', $user->civility)" required autofocus autocomplete="civility" />
+            <x-input-error class="mt-2" :messages="$errors->get('civility')" />
         </div>
 
+        <!-- First Name -->
+        <div>
+            <x-input-label for="firstName" :value="__('First Name')" />
+            <x-text-input id="firstName" name="firstName" type="text" class="mt-1 block w-full" :value="old('firstName', $user->firstName)" required autocomplete="firstName" />
+            <x-input-error class="mt-2" :messages="$errors->get('firstName')" />
+        </div>
+
+        <!-- Last Name -->
+        <div>
+            <x-input-label for="lastName" :value="__('Last Name')" />
+            <x-text-input id="lastName" name="lastName" type="text" class="mt-1 block w-full" :value="old('lastName', $user->lastName)" required autocomplete="lastName" />
+            <x-input-error class="mt-2" :messages="$errors->get('lastName')" />
+        </div>
+
+        <!-- Email -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
@@ -45,6 +61,48 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+        <!-- Password -->
+        <div>
+            <x-input-label for="password" :value="__('Password')" />
+            <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" :value="old('password')" autocomplete="new-password" />
+            <x-input-error class="mt-2" :messages="$errors->get('password')" />
+        </div>
+
+        <!-- Address -->
+        <div>
+            <x-input-label for="address" :value="__('Address')" />
+            <x-text-input id="address" name="address" type="text" class="mt-1 block w-full" :value="old('address', $user->address)" required autocomplete="address" />
+            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+        </div>
+
+        <!-- ZIP Code -->
+        <div>
+            <x-input-label for="ZIP_code" :value="__('ZIP Code')" />
+            <x-text-input id="ZIP_code" name="ZIP_code" type="text" class="mt-1 block w-full" :value="old('ZIP_code', $user->ZIP_code)" required autocomplete="ZIP_code" />
+            <x-input-error class="mt-2" :messages="$errors->get('ZIP_code')" />
+        </div>
+
+        <!-- City -->
+        <div>
+            <x-input-label for="city" :value="__('City')" />
+            <x-text-input id="city" name="city" type="text" class="mt-1 block w-full" :value="old('city', $user->city)" required autocomplete="city" />
+            <x-input-error class="mt-2" :messages="$errors->get('city')" />
+        </div>
+
+        <!-- Country -->
+        <div>
+            <x-input-label for="country" :value="__('Country')" />
+            <x-text-input id="country" name="country" type="text" class="mt-1 block w-full" :value="old('country', $user->country)" required autocomplete="country" />
+            <x-input-error class="mt-2" :messages="$errors->get('country')" />
+        </div>
+
+        <!-- Phone Number -->
+        <div>
+            <x-input-label for="phone_number" :value="__('Phone Number')" />
+            <x-text-input id="phone_number" name="phone_number" type="text" class="mt-1 block w-full" :value="old('phone_number', $user->phone_number)" required autocomplete="phone_number" />
+            <x-input-error class="mt-2" :messages="$errors->get('phone_number')" />
         </div>
 
         <div class="flex items-center gap-4">
