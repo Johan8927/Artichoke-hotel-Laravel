@@ -10,8 +10,8 @@ class HeroesSeeder extends Seeder
     public function run(): void
     {
         DB::table('heroes')->insert([
-            'section_name' => 'Hero',
-            'section_content' => 'https://www.travelmanagers.com.au/wp-content/uploads/2023/06/AdobeStock_286563877-1.jpeg',
+            'section_name' => 'Hotel Artichaut',
+            'section_content' => 'Welcome to our provençal resort, with our amenities ready for use',
             'id_picture' => 11,
         ]);
     }
