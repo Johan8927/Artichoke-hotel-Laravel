@@ -1,7 +1,7 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from "./router.js";
+import './bootstrap';
 
-const app = createApp(App);
-app.mount('#app');  // Monte Vue sur un élément avec l'ID "app"
-app.use(router);
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();

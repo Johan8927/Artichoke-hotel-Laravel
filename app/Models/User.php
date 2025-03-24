@@ -43,6 +43,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public static function create(array $array)
+    {
+        return User::query()->create($array);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

@@ -1,47 +1,47 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="client-account-container">
+    <p class="text-4xl text-black luxurious-roman-regular">Please log in to continue</p>
+    <div class="mt-40 text-center">
+        <p class="text-2xl luxurious-roman-regular text-gray-700">New to hotel Artichaud? <span class="text-green-600 underline">Sign up now</span></p>
+    </div>
+    <div class="mt-10 text-center">
+    </div>
+    <!-- Form Section -->
+    <div class="form-container">
+        <div class="max-w-md mx-auto p-8 border rounded-lg shadow-lg bg-amber-50">
+            <div class="mb-6">
+                <label for="clientEmail" class="block text-2xl luxurious-roman-regular text-gray-700">Email</label>
+                <input
+                    id="clientEmail"
+                    type="email"
+                    v-model="clientEmail"
+                    placeholder="Enter your email"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md mt-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+            </div>
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+            <div class="mb-6">
+                <label for="clientPassword" class="block text-2xl luxurious-roman-regular text-gray-700">Password</label>
+                <input
+                    id="clientPassword"
+                    type="password"
+                    v-model="clientPassword"
+                    placeholder="Enter your password"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md mt-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                />
+            </div>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div class="text-center">
+                <button @click="submitForm"
+                        class="bg-green-600 text-white text-1xl luxurious-roman-regular py-2 px-6 rounded-md hover:bg-green-700 transition duration-300">
+                    Submit
+                </button>
+                <br><br>
+                <a href="/register" class="text-blue-500 hover:text-blue-600 text-1xl luxurious-roman-regular">Forgot Password?</a>
+                <p class="mt-6 text-gray-600 text-2xl luxurious-roman-regular">
+                    Don't have an account ? <a href="/register" class="text-blue-500 text-2xl luxurious-roman-regular hover:text-blue-600"> Sign Up</a>
+                </p>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>

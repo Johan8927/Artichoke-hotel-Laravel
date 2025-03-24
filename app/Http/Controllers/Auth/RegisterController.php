@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/account';
 
     /**
      * Create a new controller instance.
@@ -40,33 +40,39 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+
+    protected function validator(array $data): \Illuminate\Contracts\Validation\Validator
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'civility' => 'required|string|max:10',
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'ZIP_code' => 'required|string|max:20',
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
-    protected function create(array $data)
+
+
+    protected function create(array $data): User
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'civility' => $data['civility'],  // Correct
+            'firstName' => $data['firstName'],  // Correct
+            'lastName' => $data['lastName'],  // Correct
+            'address' => $data['address'],  // Correct
+            'ZIP_code' => $data['ZIP_code'],  // Correct
+            'city' => $data['city'],  // Correct
+            'country' => $data['country'],  // Correct
+            'phone_number' => $data['phone_number'],  // Correct
+            'email' => $data['email'],  // Correct
+            'password' => Hash::make($data['password']),  // Correct
         ]);
     }
+
 }
