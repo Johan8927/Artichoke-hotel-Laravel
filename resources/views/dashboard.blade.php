@@ -2,7 +2,8 @@
 <div class="bg-amber-50 min-h-screen">
 
     <!-- Header -->
-    <header class="fixed top-0 left-0 w-full bg-amber-50 bg-opacity-100 text-purple-950 z-50 shadow-lg animate-slide-down">
+    <header
+        class="fixed top-0 left-0 w-full bg-amber-50 bg-opacity-100 text-purple-950 z-50 shadow-lg animate-slide-down">
         <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between h-16">
             <button class="mobile-menu-button p-2 lg:hidden">
                 <span class="material-icons-outlined text-2xl">menu</span>
@@ -11,11 +12,16 @@
                 Hotel Artichaut
             </div>
             <div class="flex items-center space-x-2">
-                <a href="{{ route('dashboard') }}" class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Home</a>
-                <span class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Explore</span>
-                <span class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Rooms</span>
-                <span class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">About</span>
-                <span class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Contact</span>
+                <a href="{{ route('dashboard') }}"
+                   class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Home</a>
+                <span
+                    class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Explore</span>
+                <span
+                    class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Rooms</span>
+                <span
+                    class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">About</span>
+                <span
+                    class="nav-links material-icons-outlined p-2 cursor-pointer transition-transform duration-300 hidden md:block">Contact</span>
                 <a href="{{ route('login') }}"
                    class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-lime-500 hover:bg-lime-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500">
                     <span class="material-icons-outlined mr-2"></span>
@@ -169,10 +175,15 @@
                                     <button type="reset"
                                             class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">Cancel
                                     </button>
-                                    <button type="submit"
-                                            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Save
-                                        Changes
-                                    </button>
+
+                                    <form method="POST" action="{{ route('profile.update') }}">
+                                        @csrf
+                                        <button type="submit"
+                                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                                            Save
+                                            Changes
+                                        </button>
+                                    </form>
                                 </div>
                             </form>
                         </div>
