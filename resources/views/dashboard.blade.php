@@ -33,7 +33,7 @@
                 @csrf
                 <button type="submit"
                         class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                    <span class="material-icons-outlined mr-2">logout</span>
+                    <span class="material-icons-outlined mr-2"></span>
                     Logout
                 </button>
             </form>
@@ -116,14 +116,15 @@
             Account Modification Form
         </h1>
 
+        <!-- update profile form  -->
         <div class="mt-6 md:mt-8 scale-100 md:scale-125">
             <div class="bg-amber-50 min-h-screen">
                 <div class="mt-40 text-center p-4">
                     <div class="mt-6 md:mt-8 flex justify-center">
                         <div class="w-full max-w-lg bg-amber-50 p-6 md:p-10 shadow-xl rounded-2xl">
-                            <form class="space-y-4" action="{{ route('profile.update') }}" method="POST">
+                            <form class="space-y-4" method="get">
                                 @csrf
-                                @method('PUT')
+                                @method('get')
                                 <label for="civility">Civility</label>
                                 <input type="text" id="civility" name="civility" value="{{ old('civility') }}"
                                        class="w-full px-3 py-2 border rounded-md">
