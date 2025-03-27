@@ -212,7 +212,7 @@
                         Cancel
                     </button>
                     <button type="submit"
-                            class="bg-green-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:shadow-outline-purple active:bg-green-700 transition duration-150 ease-in-out">
+                            class="bg-lime-600  text-white py-2 px-4 rounded-md shadow-sm hover:bg-lime-800  focus:outline-none focus:shadow-outline-purple active:bg-lime-700 transition duration-150 ease-in-out">
                         Save Changes
                     </button>
                 </div>
