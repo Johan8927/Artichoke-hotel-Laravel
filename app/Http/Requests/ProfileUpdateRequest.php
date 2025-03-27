@@ -2,29 +2,51 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class ProfileUpdateRequest extends FormRequest
 {
     /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => [
-                'required',
-                'string',
-                'lowercase',
-                'email',
-                'max:255',
-                Rule::unique(User::class)->ignore($this->user()->id),
-            ],
+            'civility' => ['nullable', 'string', 'max:255'],
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($this->user()->id)],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'ZIP_code' => ['nullable', 'string', 'max:20'],
+            'city' => ['nullable', 'string', 'max:255'],
+            'country' => ['nullable', 'string', 'max:255'],
+            'phone_number' => ['nullable', 'string', 'max:20'],
+        ];
+    }
+
+    /**
+     * Get custom messages for validation errors (optionnel).
+     */
+    public function messages(): array
+    {
+        return [
+            'firstName.required' => 'The first name field is required.',
+            'lastName.required' => 'The last name field is required.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.unique' => 'This email is already taken.',
+            'password.min' => 'The password must be at least 8 characters.',
+            'password.confirmed' => 'The password confirmation does not match.',
         ];
     }
 }

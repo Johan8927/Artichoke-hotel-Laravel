@@ -4,7 +4,8 @@ namespace App\Http\Controllers\landingPage;
 
 use App\Models\Room;
 use Illuminate\Http\Request;
-use LaraCrud\Crud\Controller;
+use Illuminate\Routing\Controller;
+
 
 
 /**
