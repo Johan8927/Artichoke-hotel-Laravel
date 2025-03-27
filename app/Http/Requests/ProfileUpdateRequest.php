@@ -42,11 +42,17 @@ class ProfileUpdateRequest extends FormRequest
         return [
             'firstName.required' => 'The first name field is required.',
             'lastName.required' => 'The last name field is required.',
+
+            'address.max' => 'The address field can only contain a maximum of 255 characters.',
+            'ZIP_code.max' => 'The ZIP code field can only contain a maximum of 20 characters.',
+            'city.max' => 'The city field can only contain a maximum of 255 characters.',
+            'country.max' => 'The country field can only contain a maximum of 255 characters.',
             'email.required' => 'The email field is required.',
             'email.email' => 'Please enter a valid email address.',
             'email.unique' => 'This email is already taken.',
             'password.min' => 'The password must be at least 8 characters.',
             'password.confirmed' => 'The password confirmation does not match.',
+
         ];
     }
 }

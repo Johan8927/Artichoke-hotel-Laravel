@@ -1,6 +1,5 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <div class="bg-amber-50 min-h-screen">
-
     <!-- Header -->
     <header
         class="fixed top-0 left-0 w-full bg-amber-50 bg-opacity-100 text-purple-950 z-50 shadow-lg animate-slide-down">
@@ -118,78 +117,12 @@
             </div>
         </div>
 
-        <h1 class="text-4xl md:text-6xl lg:text-4xl text-black font-bonheur-royale">
-            Account Modification Form
-        </h1>
-
-        <!-- update profile form  -->
-        <div class="mt-6 md:mt-8 scale-100 md:scale-125">
-            <div class="bg-amber-50 min-h-screen">
-                <div class="mt-40 text-center p-4">
-                    <div class="mt-6 md:mt-8 flex justify-center">
-                        <div class="w-full max-w-lg bg-amber-50 p-6 md:p-10 shadow-xl rounded-2xl">
-                            <form class="space-y-4" method="get">
-                                @csrf
-                                @method('get')
-                                <label for="civility">Civility</label>
-                                <input type="text" id="civility" name="civility" value="{{ old('civility') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="firstName">First Name</label>
-                                <input type="text" id="firstName" name="firstName" value="{{ old('firstName') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="lastName">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" value="{{ old('lastName') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="password">Password</label>
-                                <input type="password" id="password" name="password"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="address">Address</label>
-                                <input type="text" id="address" name="address" value="{{ old('address') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="ZIP_code">ZIP Code</label>
-                                <input type="text" id="ZIP_code" name="ZIP_code" value="{{ old('ZIP_code') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="city">City</label>
-                                <input type="text" id="city" name="city" value="{{ old('city') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="country">Country</label>
-                                <input type="text" id="country" name="country" value="{{ old('country') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="phone_number">Phone Number</label>
-                                <input type="text" id="phone_number" name="phone_number"
-                                       value="{{ old('phone_number') }}" class="w-full px-3 py-2 border rounded-md">
-
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" value="{{ old('email') }}"
-                                       class="w-full px-3 py-2 border rounded-md">
-
-                                <div class="flex justify-center space-x-4">
-                                    <button type="reset"
-                                            class="px-4 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500">Cancel
-                                    </button>
-
-                                    <form method="POST" action="{{ route('profile.update') }}">
-                                        @csrf
-                                        <button type="submit"
-                                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
-                                            Save
-                                            Changes
-                                        </button>
-                                    </form>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Bouton "Account Modification" -->
+        <div class="mt-8 pb-8">
+            <a href="http://127.0.0.1:8000/profile"
+               class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-purple-950 hover:bg-purple-800 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-950">
+                Account Modification
+            </a>
         </div>
     </div>
 </div>
