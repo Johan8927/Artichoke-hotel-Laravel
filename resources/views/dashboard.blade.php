@@ -1,5 +1,6 @@
-<script src="https://cdn.tailwindcss.com"></script>
 <div class="bg-amber-50 min-h-screen">
+<script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Header -->
     <header
         class="fixed top-0 left-0 w-full bg-amber-50 bg-opacity-100 text-purple-950 z-50 shadow-lg animate-slide-down">
@@ -48,7 +49,7 @@
 
     <!-- Main Content -->
     <div class="mt-40 text-center p-4">
-        <h1 class="text-4xl md:text-6xl lg:text-8xl text-black font-bonheur-royale">
+        <h1 class="text-6xl md:text-6xl lg:text-6xl text-black font-bonheur-royale">
             Welcome, nice to see you again!
         </h1>
         <div class="mt-60 md:mt-20 scale-90 md:scale-200 flex justify-center">
