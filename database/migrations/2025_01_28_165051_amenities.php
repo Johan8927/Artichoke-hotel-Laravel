@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('amenities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('id_picture'); // Assurez-vous que cette colonne est définie
+            $table->string('picture');
+            // Assurez-vous que cette colonne est définie
             $table->text('content');
+            $table->string('price');
             $table->timestamps();
 
             // Si c'est une clé étrangère
-            $table->foreign('id_picture')->references('id')->on('pictures')->onDelete('cascade');
+
         });
 
 
